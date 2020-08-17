@@ -11,8 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "ascii-table": "0.0.9",
-    "canvacord": "^3.0.9",
-    "canvas": "^2.6.1",
     "common-tags": "^1.8.0",
     "discord.js": "^12.2.0",
     "lodash": "^4.17.19",
@@ -24,7 +22,6 @@
     "node-superfetch": "^0.1.10",
     "parse-ms": "^2.1.0",
     "random": "^2.2.0",
-    "random-puppy": "^1.1.0",
     "request": "^2.88.2",
     "roastme": "0.0.1",
     "salvage.db": "^1.2.2",
