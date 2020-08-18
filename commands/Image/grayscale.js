@@ -21,13 +21,14 @@ module.exports.run = async (bot, message, args) => {
       .setImage(`https://some-random-api.ml/canvas/greyscale?avatar=${avatar}`)
       .setFooter(`${bot.user.username} by FleeffyPawsYT`)
     message.channel.send(embed);
-  } catch (e) {
-    console.log(e)
-    const errembed = new MessageEmbed()
-      .setTitle("An error occured")
-      .setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
-    message.channel.send(errembed)
-  }
+    } catch (e) {
+        console.log(e)
+        const errembed = new MessageEmbed()
+            .setTitle("An error occured")
+            .setColor('#FF000')
+            .setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+        message.channel.send(errembed)
+    }
 }
 
 module.exports.config = {
@@ -36,6 +37,6 @@ module.exports.config = {
   usage: "[MEMBER]",
   accessableby: "Members",
   category: "Image",
-  timeout: '5000',
+  timeout: 5000,
   timeoutname: '5 seconds'
 }
