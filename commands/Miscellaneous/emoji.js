@@ -28,7 +28,8 @@ module.exports.run = async (bot, message, args) => {
     let Embed = new MessageEmbed()
       .setTitle(`Emojis in ${message.guild.name}.`)
       .setDescription(`**Animated [${Animated}]**:\n${EmojisAnimated}\n\n**Standard [${EmojiCount}]**:\n${Emojis}\n\n**Over all emojis [${OverallEmojis}]**`)
-      .setColor(`RANDOM`);
+      .setColor(`RANDOM`)
+      .setFooter(bot.user.username + ' by FleeffyPawsYT')
     message.channel.send(Embed);
   } catch (e) {
     console.log(e)
@@ -42,7 +43,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "emoji",
-  description: "Views all the emoji",
+  description: "Views all the emoji in the server",
   accessableby: "Member",
   timeout: 5000,
   timeoutname: '5 seconds',
