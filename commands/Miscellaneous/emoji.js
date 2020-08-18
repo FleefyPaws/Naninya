@@ -31,14 +31,14 @@ module.exports.run = async (bot, message, args) => {
       .setColor(`RANDOM`)
       .setFooter(bot.user.username + ' by FleeffyPawsYT')
     message.channel.send(Embed);
-  } catch (e) {
-    console.log(e)
-    const errembed = new MessageEmbed()
-      .setTitle("An error occured")
-      .setColor('#FF0000')
-      .setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
-    message.channel.send(errembed)
-  }
+    } catch (e) {
+        console.log(e)
+        const errembed = new MessageEmbed()
+            .setTitle("An error occured")
+            .setColor('#FF0000')
+            .setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+        message.channel.send(errembed)
+    }
 }
 
 module.exports.config = {
