@@ -85,13 +85,14 @@ module.exports.run = async (bot, message, args) => {
           return message.channel.send(Embed)
         };
       })
-  } catch (e) {
-    console.log(e)
-    const errembed = new MessageEmbed()
-      .setTitle("An error occured")
-      .setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
-    message.channel.send(errembed)
-  }
+    } catch (e) {
+        console.log(e)
+        const errembed = new MessageEmbed()
+            .setTitle("An error occured")
+            .setColor('#FF000')
+            .setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+        message.channel.send(errembed)
+    }
 }
 
 module.exports.config = {
