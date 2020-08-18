@@ -65,7 +65,7 @@ module.exports.run = async (bot, message, args) => {
 		console.log(e)
 		const errembed = new MessageEmbed()
 			.setTitle("An error occured")
-			.setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+			.setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
 		message.channel.send(errembed)
 	}
 }
@@ -74,6 +74,8 @@ module.exports.config = {
 	name: "weather",
 	description: "Show the weather of a specific place",
 	usage: "<PLACE>",
+	timeout: 5000,
+	timeoutname: '5 seconds',
 	accessableby: "Members",
 	category: 'Miscellaneous'
 }
