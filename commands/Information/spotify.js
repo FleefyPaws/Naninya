@@ -10,12 +10,7 @@ module.exports.run = async (bot, message, args) => {
         if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
             return message.channel.send(`Please Give The Bot **Manage Messages** Permission`)
         }
-        let user;
-        if (message.mentions.users.first()) {
-            user = message.mentions.users.first();
-        } else {
-            user = message.author;
-        }
+        const user = message.mentions.members.first() ? message.mentions.members.first() : message.guild.cache.get(args[0]) || message.author;
 
         let status;
         if (user.presence.activities.length === 1) status = user.presence.activities[0];
@@ -55,7 +50,8 @@ module.exports.run = async (bot, message, args) => {
         console.log(e)
         const errembed = new MessageEmbed()
             .setTitle("An error occured")
-            .setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+            .setColor('#FF000')
+            .setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
         message.channel.send(errembed)
     }
 }
