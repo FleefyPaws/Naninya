@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args) => {
         const nulluserembed = new MessageEmbed()
             .setTitle('❌ Please give the id or mention a valid member')
             .setColor('#FF0000')
-        const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        const user = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]);
         if (!user) {
             message.delete();
             return message.reply(nulluserembed).then(msg => msg.delete({
