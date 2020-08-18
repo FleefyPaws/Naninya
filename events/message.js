@@ -3,9 +3,6 @@ const {
 	Message,
 	MessageEmbed
 } = require('discord.js');
-const {
-	badwords
-} = require('../badwords.json');
 let Timeout = new Set()
 /**
  * 
