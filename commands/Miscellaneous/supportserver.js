@@ -16,14 +16,14 @@ module.exports.run = async (bot, message, args) => {
 		console.log(e)
 		const errembed = new MessageEmbed()
 			.setTitle("An error occured")
-			.setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+			.setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
 		message.channel.send(errembed)
 	}
 }
 
 module.exports.config = {
-	name: "server",
-	description: "An invite link for the bot server",
+	name: "supportserver",
+	description: "An invite link for the bot support server",
 	accessableby: "Members",
 	timeout: 5000,
 	timeoutname: '5 seconds',
