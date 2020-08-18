@@ -21,11 +21,12 @@ module.exports.run = async (bot, message, args) => {try {
         .setFooter(`${bot.user.username} by FleeffyPawsYT`)
     message.channel.send(embed);
     }
-    catch (e) {
+    } catch (e) {
         console.log(e)
         const errembed = new MessageEmbed()
             .setTitle("An error occured")
-            .setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+            .setColor('#FF000')
+            .setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
         message.channel.send(errembed)
     }
 }
