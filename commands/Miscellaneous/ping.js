@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
             .addField('Latencies', [`**❯ Bot Latency: \`${latency}ms\`**`, `**❯ API Latency: \`${Math.round(bot.ws.ping)}ms\`**`])
             .setColor(color)
             .setTimestamp()
-            .setFooter(`${bot.user.isername} by FleeffyPawsYT`);
+            .setFooter(`${bot.user.username} by FleeffyPawsYT`);
 
         message.channel.send(pingdeEmbed);
     } catch (e) {
