@@ -20,10 +20,10 @@ module.exports.run = async (bot, message, args) => {
         let color;
         if (latency && Math.round(bot.ws.ping) >= 200) {
             color = '#FF0000'
-        } else if (latency && Math.round(bot.ws.ping) >= 100) {
+        } else if (latency && Math.round(bot.ws.ping) >= 150) {
             color = '#FFA500'
         } else {
-            color = "#008000"
+            color = "#32CD32"
         }
         const pingdeEmbed = new MessageEmbed()
             .setTitle('Pong!')
@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
         console.log(e)
         const errembed = new MessageEmbed()
             .setTitle("An error occured")
-            .setDescription(`Error: ${error}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
+            .setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
         message.channel.send(errembed)
     }
 }
