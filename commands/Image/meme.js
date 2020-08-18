@@ -50,7 +50,7 @@ module.exports.config = {
     description: "Summons a meme picture",
     accessableby: "Members",
     category: "Image",
-    timeout: '5000',
+    timeout: 5000,
     timeoutname: '5 seconds',
     aliases: ['memes', 'memey']
 }
