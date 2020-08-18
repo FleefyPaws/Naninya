@@ -27,18 +27,6 @@ module.exports = async (bot, message) => {
 		}
 		message.channel.send(prefixhelp);
 	}
-	let confirm = false;
-
-	var i;
-	for (i = 0; i < badwords.length; i++) {
-		if (message.content.toLowerCase().includes(badwords[i].toLowerCase())) confirm = true;
-	}
-	if (confirm) {
-		message.delete();
-		return message.reply('That word is banned here').then(msg => msg.delete({
-			timeout: 5000
-		}));
-	}
 	let args = message.content.slice(bot.prefix.length).trim().split(/ +/g);
 	let cmd = args.shift().toLowerCase();
 	if (!message.content.startsWith(bot.prefix.toLowerCase())) return
