@@ -71,7 +71,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
     name: "corona",
-    description: "Views the number of covid patients in a country or the wold",
+    description: "Views the number of covid patients in a country or the world",
     usage: "[COUNTRY]",
     accessableby: "Members",
     category: "Miscellaneous",
