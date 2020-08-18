@@ -10,6 +10,7 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('Invite the bot to your server')
 			.setDescription('[Bot Invite](https://bit.ly/3iVKDX6)')
 			.setTimestamp()
+			.setColor('#32CD32')
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 		message.channel.send(embed);
 	} catch (e) {
