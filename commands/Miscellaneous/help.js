@@ -55,7 +55,7 @@ module.exports.run = async (bot, message, args) => {
             embed.setDescription(`The bot's prefix is: \`${bot.prefix}\`\n
             **Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
             **Description:** ${command.description || "No Description provided."}
-            **Usage:** ${command.usage ? `\`${prefix}${command.name} ${command.usage}\``: `${prefix}${command.name}`}
+            **Usage:** ${command.usage ? `\`${bot.prefix}${command.name} ${command.usage}\``: `${bot.prefix}${command.name}`}
             **Accessible by:** ${command.accessableby || "Members"}
             **Aliases:** ${command.aliases ? command.aliases.join(", ") : "None."}`)
 
@@ -65,6 +65,7 @@ module.exports.run = async (bot, message, args) => {
         console.log(e)
         const errembed = new MessageEmbed()
             .setTitle("An error occured")
+            .setColor('#FF0000')
             .setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
         message.channel.send(errembed)
     }
