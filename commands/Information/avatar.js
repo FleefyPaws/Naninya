@@ -1,7 +1,8 @@
 const {
     MessageEmbed
 } = require("discord.js");
-module.exports.run = async (bot, message, args) => {try {
+module.exports.run = async (bot, message, args) => {
+    try {
     if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
         return message.channel.send(`Please Give The Bot **Embed Links** Permission`)
     }
@@ -20,7 +21,6 @@ module.exports.run = async (bot, message, args) => {try {
         .setImage(`${avatar}`)
         .setFooter(`${bot.user.username} by FleeffyPawsYT`)
     message.channel.send(embed);
-    }
     } catch (e) {
         console.log(e)
         const errembed = new MessageEmbed()
