@@ -24,7 +24,7 @@
     "random": "^2.2.0",
     "request": "^2.88.2",
     "roastme": "0.0.1",
-    "salvage.db": "^1.2.2",
     "weather-js": "^2.0.0"
-  }
+  },
+  "devDependencies": {}
 }

@@ -5,10 +5,10 @@ const {
 module.exports.run = async (bot, message, args) => {
 	try {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Embed Links** Permission`)
+			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
 		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`)
+			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
 		}
 		weather.find({
 			search: args.join(' '),
@@ -23,8 +23,8 @@ module.exports.run = async (bot, message, args) => {
 			if (!args[0]) {
 				message.delete();
 				const errembed = new MessageEmbed()
-					.setTitle("❌ Please provide a location.")
-					.setColor('#FF0000')
+					.setTitle('❌ Please provide a location.')
+					.setColor('#FF0000');
 				return message.channel.send(errembed).then(msg => msg.delete({
 					timeout: 5000
 				}));
@@ -33,8 +33,8 @@ module.exports.run = async (bot, message, args) => {
 			if (result === undefined || result.length === 0) {
 				message.delete();
 				const errembed = new MessageEmbed()
-					.setTitle("❌ Invalid location.")
-					.setColor('#FF0000')
+					.setTitle('❌ Invalid location.')
+					.setColor('#FF0000');
 				return message.channel.send(errembed).then(msg => msg.delete({
 					timeout: 5000
 				}));
@@ -61,21 +61,22 @@ module.exports.run = async (bot, message, args) => {
 				.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 			return message.channel.send(weatherinfo);
 		});
-	} catch (e) {
-		console.log(e)
+	} catch (err) {
+		console.log(err);
 		const errembed = new MessageEmbed()
-			.setTitle("An error occured")
-			.setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`)
-		message.channel.send(errembed)
+			.setTitle('An error occured')
+			.setColor('#FF0000')
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`);
+		message.channel.send(errembed);
 	}
-}
+};
 
 module.exports.config = {
-	name: "weather",
-	description: "Show the weather of a specific place",
-	usage: "<PLACE>",
+	name: 'weather',
+	description: 'Show the weather of a specific place',
+	usage: '<PLACE>',
 	timeout: 5000,
 	timeoutname: '5 seconds',
-	accessableby: "Members",
+	accessableby: 'Members',
 	category: 'Miscellaneous'
-}
+};
