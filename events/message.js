@@ -24,7 +24,6 @@ module.exports = async (bot, message) => {
 		}
 		message.channel.send(prefixhelp);
 	}
-	if (message.content.toLowerCase().include('cow')) return message.channel.send('NOPE');
 	let args = message.content.slice(bot.prefix.length).trim().split(/ +/g);
 	let cmd = args.shift().toLowerCase();
 	if (!message.content.startsWith(bot.prefix.toLowerCase())) return
