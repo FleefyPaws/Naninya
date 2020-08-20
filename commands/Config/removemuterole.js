@@ -3,27 +3,36 @@ const {
 } = require('discord.js');
 const muterole = require('../../models/muterole');
 module.exports.run = async (bot, message) => {
-	if (!message.member.hasPermission('ADMINISTRATOR')) {
-		message.delete();
-		return message.channel.send('You do not have the permission to use this command');
-	}
-	muterole.findOneAndDelete({
-		GuildID: message.guild.id
-	},
-	async (err, data) => {
-		if (err) console.log(err);
-		if (!data) {
-			const nope1rmembed = new MessageEmbed()
-				.setTitle(`❌ How will you delete a thing that is not even there!\nPlease do \`${bot.prefix}setmuterole <ROLE | ROLEID>\` to set muterole!`)
-				.setColor('#FF0000');
-			return message.channel.send(nope1rmembed);
-		} else {
-			const nope1rmembed = new MessageEmbed()
-				.setTitle(`<:yes:744037966942568539> The muterole has been deleted`)
-				.setColor('#32cd32');
-			return message.channel.send(nope1rmembed);
+	try {
+		if (!message.member.hasPermission('ADMINISTRATOR')) {
+			message.delete();
+			return message.channel.send('You do not have the permission to use this command');
 		}
-	});
+		muterole.findOneAndDelete({
+			GuildID: message.guild.id
+		},
+			async (err, data) => {
+				if (err) console.log(err);
+				if (!data) {
+					const nope1rmembed = new MessageEmbed()
+						.setTitle(`❌ How will you delete a thing that is not even there!\nPlease do \`${bot.prefix}setmuterole <ROLE | ROLEID>\` to set muterole!`)
+						.setColor('#FF0000');
+					return message.channel.send(nope1rmembed);
+				} else {
+					const nope1rmembed = new MessageEmbed()
+						.setTitle(`<:yes:744037966942568539> The muterole has been deleted`)
+						.setColor('#32cd32');
+					return message.channel.send(nope1rmembed);
+				}
+			});
+	} catch (err) {
+		console.log(err);
+		const errembed = new MessageEmbed()
+			.setTitle('An error occured')
+			.setColor('#FF0000')
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+		return message.channel.send(errembed);
+	}
 };
 
 module.exports.config = {

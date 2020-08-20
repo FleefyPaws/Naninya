@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
 			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
 		}
 		const member = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]) || message.member;
-		const memberelavatedperms = [];
+		let memberelavatedperms = [];
 		let isMuted;
 		let isAdmin;
 		if (member.hasPermission('ADMINISTRATOR')) {
@@ -48,7 +48,7 @@ module.exports.run = async (bot, message, args) => {
 		if (member.hasPermission('MANAGE_WEBHOOKS')) memberelavatedperms.push('Manage Webhooks');
 		if (member.hasPermission('VIEW_CHANNEL')) memberelavatedperms.push('Read Text Channels and See Voice Channels');
 
-		const membertextpermissions = [];
+		let membertextpermissions = [];
 		if (member.hasPermission('SEND_MESSAGES')) {
 			isMuted = 'No';
 			membertextpermissions.push('Send Messages');
@@ -64,7 +64,7 @@ module.exports.run = async (bot, message, args) => {
 		if (member.hasPermission('USE_EXTERNAL_EMOJIS')) membertextpermissions.push('Use External Emojis');
 		if (member.hasPermission('ADD_REACTIONS')) membertextpermissions.push('Add Reactions');
 
-		const membervoicepermissions = [];
+		let membervoicepermissions = [];
 		if (member.hasPermission('CONNECT')) membervoicepermissions.push('Connect');
 		if (member.hasPermission('SPEAK')) membervoicepermissions.push('Speak');
 		if (member.hasPermission('STREAM')) membervoicepermissions.push('Video');
@@ -76,11 +76,11 @@ module.exports.run = async (bot, message, args) => {
 
 		const userFlags = member.user.flags.toArray();
 
-		function game() {
+		function game1() {
 			let game;
 			if (member.user.presence.activities.length >= 1) game = `**${member.user.presence.activities[0].type}** ${member.user.presence.activities[0].name}`;
-			else if (member.user.presence.activities.length < 1) game = 'Not playing a game'; // This will check if the user doesn't playing anything.
-			return game; // Return the result.
+			else if (member.user.presence.activities.length < 1) game = 'Not playing a game';
+			return game;
 		}
 		if (message.mentions.members.first()) {
 			const roles = member.roles.cache
@@ -101,7 +101,7 @@ module.exports.run = async (bot, message, args) => {
 					`**❯ Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
 					`**❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
 					`**❯ Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
-					`**❯ Game:** ${game()}`,
+					`**❯ Game:** ${game1()}`,
 					`\u200b`
 				])
 				.addField('Member', [
@@ -207,7 +207,7 @@ module.exports.run = async (bot, message, args) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF000')
-			.setDescription(`Error: ${e}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`);
+			.setDescription(`Error: ${e}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
 		message.channel.send(errembed);
 	}
 };

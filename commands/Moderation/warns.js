@@ -51,34 +51,34 @@ module.exports.run = async (bot, message, args) => {
 			Guild: message.guild.id,
 			User: user.id
 		},
-		async (err, data) => {
-			if (err) console.log(err);
-			if (!data) {
-				const nowarnsembed = new MessageEmbed()
-					.setTitle(`❌ ${user.user.tag} Has Not Got Any Warns In This Guild`)
-					.setColor('#FF0000');
-				return message.channel.send(nowarnsembed);
-			} else {
-				const Embed = new MessageEmbed()
-					.setDescription(
-						data.map((d) => d.Warns.map((w, i) => `**${i + 1} - Warn** \n\u3000**Moderator: ${message.guild.members.cache.get(w.Moderator).user.tag}** \n\u3000**Reason: ${w.Reason}**\n `).join('\n')))
-					.setAuthor(`${user.user.tag}'s Warns In ${message.guild.name}`, user.user.displayAvatarURL({
-						dynamic: true,
-						format: 'png'
-					}))
-					.setFooter(
-						data.map((d) => `${user.user.tag} Has ${d.Warns.length} Warns`))
-					.setColor('#32cd32')
-					.setTimestamp();
-				return message.channel.send(Embed);
-			}
-		});
+			async (err, data) => {
+				if (err) console.log(err);
+				if (!data) {
+					const nowarnsembed = new MessageEmbed()
+						.setTitle(`❌ ${user.user.tag} Has Not Got Any Warns In This Guild`)
+						.setColor('#FF0000');
+					return message.channel.send(nowarnsembed);
+				} else {
+					const Embed = new MessageEmbed()
+						.setDescription(
+							data.map((d) => d.Warns.map((w, i) => `**${i + 1} - Warn** \n\u3000**Moderator: ${message.guild.members.cache.get(w.Moderator).user.tag}** \n\u3000**Reason: ${w.Reason}**\n `).join('\n')))
+						.setAuthor(`${user.user.tag}'s Warns In ${message.guild.name}`, user.user.displayAvatarURL({
+							dynamic: true,
+							format: 'png'
+						}))
+						.setFooter(
+							data.map((d) => `${user.user.tag} Has ${d.Warns.length} Warns`))
+						.setColor('#32cd32')
+						.setTimestamp();
+					return message.channel.send(Embed);
+				}
+			});
 	} catch (err) {
 		console.log(err);
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
 		message.channel.send(errembed);
 	}
 };

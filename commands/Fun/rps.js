@@ -26,13 +26,13 @@ module.exports.run = async (bot, message) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
 		return message.channel.send(errembed);
 	}
 	async function getResult(me, clientChosen) {
 		if ((me === '🗻' && clientChosen === '✂') ||
-            (me === '📰' && clientChosen === '🗻') ||
-            (me === '✂' && clientChosen === '📰')) {
+			(me === '📰' && clientChosen === '🗻') ||
+			(me === '✂' && clientChosen === '📰')) {
 			return 'You won!';
 		} else if (me === clientChosen) {
 			return "It's a tie!";

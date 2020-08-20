@@ -66,7 +66,7 @@ module.exports.run = async (bot, message, args) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
 		message.channel.send(errembed);
 	}
 };

@@ -61,98 +61,98 @@ module.exports.run = async (bot, message, args) => {
 		Mute.findOne({
 			GuildID: message.guild.id
 		},
-		async (err, data1) => {
-			if (err) console.log(err);
-			if (!data1) {
-				return message.channel.send(setupmuteroleembed);
-			} else {
-				const muteTime = args[1];
-				if (!muteTime) {
-					const muteRole = message.guild.roles.cache.find(role => role.id === data1.RoleID);
-					let reason = args.slice(1).join(' ');
-					if (!reason) reason = 'No reason provided';
-					const muteembed = new MessageEmbed()
-						.setColor(`#32cd32`)
-						.setTimestamp()
-						.addField('**Action:** Mute', [
-							`**Moderator:** ${message.author.tag}`,
-							`**User:** ${user.user.tag} (${user.id})`,
-							`**Reason:** ${reason}`,
-							`**Duration:** Permanent`
-						])
-						.setTimestamp();
-					const sucessembed = new MessageEmbed()
-						.setTitle(`<:yes:744037966942568539> ${user.user.username} has been muted permanently.`)
-						.setColor('#32CD32');
-					const mutedembed = new MessageEmbed()
-						.setTitle(`❌ ${user.user.username} is already muted`)
-						.setColor('#FF0000');
-					if (user.roles.cache.some(role => role.id === data1.RoleID)) return message.channel.send(mutedembed);
-					message.guild.member(user).roles.add(muteRole.id);
-					message.delete();
-					message.channel.send(sucessembed).then(msg => msg.delete({
-						timeout: 5000
-					}));
-					if (!modLogChannel) {
-						if (Math.random() * 100 < 3) {
-							return message.channel.send('You can receive mod-logs in a channel by creating a channel called `mod-logs`');
-						} else {
-							return;
-						}
-					} else {
-						modLogChannel.send(muteembed);
-					}
+			async (err, data1) => {
+				if (err) console.log(err);
+				if (!data1) {
+					return message.channel.send(setupmuteroleembed);
 				} else {
-					const muteRole = message.guild.roles.cache.find(role => role.id === data1.RoleID);
-					let reason = args.slice(2).join(' ');
-					if (!reason) reason = 'No reason provided';
-					const muteembed = new MessageEmbed()
-						.setColor(`#32cd32`)
-						.setTimestamp()
-						.addField('**Action:** Mute', [
-							`**Moderator:** ${message.author.tag}`,
-							`**User:** ${user.user.tag} (${user.id})`,
-							`**Reason:** ${reason}`,
-							`**Duration:** Permanent`
-						])
-						.setTimestamp();
-					const sucessembed = new MessageEmbed()
-						.setTitle(`<:yes:744037966942568539> ${user.user.username} has been muted permanently.`)
-						.setColor('#32CD32');
-					const mutedembed = new MessageEmbed()
-						.setTitle(`❌ ${user.user.username} is already muted`)
-						.setColor('#FF0000');
-					if (user.roles.cache.some(role => role.id === data1.RoleID)) return message.channel.send(mutedembed);
-					message.guild.member(user).roles.add(muteRole.id);
-					message.delete();
-					message.channel.send(sucessembed).then(msg => msg.delete({
-						timeout: 5000
-					}));
-					const unmuteembed = new MessageEmbed()
-						.setTitle(`<:yes:744037966942568539> \`${user}\` has been unmuted`)
-						.setColor('#32CD32');
-					if (!modLogChannel) {
-						if (Math.random() * 100 < 3) {
-							message.channel.send('You can receive mod-logs in a channel by creating a channel called `mod-logs`');
-							return setTimeout(() => {
-								message.guild.member(user).roles.remove(muteRole);
-								return message.channel.send(unmuteembed);
-							}, ms(muteTime));
+					const muteTime = args[1];
+					if (!muteTime) {
+						const muteRole = message.guild.roles.cache.find(role => role.id === data1.RoleID);
+						let reason = args.slice(1).join(' ');
+						if (!reason) reason = 'No reason provided';
+						const muteembed = new MessageEmbed()
+							.setColor(`#32cd32`)
+							.setTimestamp()
+							.addField('**Action:** Mute', [
+								`**Moderator:** ${message.author.tag}`,
+								`**User:** ${user.user.tag} (${user.id})`,
+								`**Reason:** ${reason}`,
+								`**Duration:** Permanent`
+							])
+							.setTimestamp();
+						const sucessembed = new MessageEmbed()
+							.setTitle(`<:yes:744037966942568539> ${user.user.username} has been muted permanently.`)
+							.setColor('#32CD32');
+						const mutedembed = new MessageEmbed()
+							.setTitle(`❌ ${user.user.username} is already muted`)
+							.setColor('#FF0000');
+						if (user.roles.cache.some(role => role.id === data1.RoleID)) return message.channel.send(mutedembed);
+						message.guild.member(user).roles.add(muteRole.id);
+						message.delete();
+						message.channel.send(sucessembed).then(msg => msg.delete({
+							timeout: 5000
+						}));
+						if (!modLogChannel) {
+							if (Math.random() * 100 < 3) {
+								return message.channel.send('You can receive mod-logs in a channel by creating a channel called `mod-logs`');
+							} else {
+								return;
+							}
 						} else {
-							return;
+							modLogChannel.send(muteembed);
 						}
 					} else {
-						modLogChannel.send(muteembed);
+						const muteRole = message.guild.roles.cache.find(role => role.id === data1.RoleID);
+						let reason = args.slice(2).join(' ');
+						if (!reason) reason = 'No reason provided';
+						const muteembed = new MessageEmbed()
+							.setColor(`#32cd32`)
+							.setTimestamp()
+							.addField('**Action:** Mute', [
+								`**Moderator:** ${message.author.tag}`,
+								`**User:** ${user.user.tag} (${user.id})`,
+								`**Reason:** ${reason}`,
+								`**Duration:** Permanent`
+							])
+							.setTimestamp();
+						const sucessembed = new MessageEmbed()
+							.setTitle(`<:yes:744037966942568539> ${user.user.username} has been muted permanently.`)
+							.setColor('#32CD32');
+						const mutedembed = new MessageEmbed()
+							.setTitle(`❌ ${user.user.username} is already muted`)
+							.setColor('#FF0000');
+						if (user.roles.cache.some(role => role.id === data1.RoleID)) return message.channel.send(mutedembed);
+						message.guild.member(user).roles.add(muteRole.id);
+						message.delete();
+						message.channel.send(sucessembed).then(msg => msg.delete({
+							timeout: 5000
+						}));
+						const unmuteembed = new MessageEmbed()
+							.setTitle(`<:yes:744037966942568539> \`${user}\` has been unmuted`)
+							.setColor('#32CD32');
+						if (!modLogChannel) {
+							if (Math.random() * 100 < 3) {
+								message.channel.send('You can receive mod-logs in a channel by creating a channel called `mod-logs`');
+								return setTimeout(() => {
+									message.guild.member(user).roles.remove(muteRole);
+									return message.channel.send(unmuteembed);
+								}, ms(muteTime));
+							} else {
+								return;
+							}
+						} else {
+							modLogChannel.send(muteembed);
+						}
 					}
 				}
-			}
-		});
+			});
 	} catch (err) {
 		console.log(err);
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
 		message.channel.send(errembed);
 	}
 };

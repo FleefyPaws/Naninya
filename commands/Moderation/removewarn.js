@@ -59,25 +59,25 @@ module.exports.run = async (bot, message, args) => {
 			Guild: message.guild.id,
 			User: user.id
 		},
-		async (err, data) => {
-			if (err) console.log(err);
-			if (!data) {
-				return message.channel.send(nowarnembed);
-			} else {
-				data.Warns.splice(parseInt(args) - 1, 1);
-				const sucessembed = new MessageEmbed()
-					.setTitle(`<:yes:744037966942568539> Removed Case **${warnid}** From \`${user.user.username}\``)
-					.setColor('#32CD32');
-				message.channel.send(sucessembed);
-				data.save();
-			}
-		});
+			async (err, data) => {
+				if (err) console.log(err);
+				if (!data) {
+					return message.channel.send(nowarnembed);
+				} else {
+					data.Warns.splice(parseInt(args) - 1, 1);
+					const sucessembed = new MessageEmbed()
+						.setTitle(`<:yes:744037966942568539> Removed Case **${warnid}** From \`${user.user.username}\``)
+						.setColor('#32CD32');
+					message.channel.send(sucessembed);
+					data.save();
+				}
+			});
 	} catch (err) {
 		console.log(err);
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **https: //discord.gg/s2ezK4X**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
 		message.channel.send(errembed);
 	}
 };
