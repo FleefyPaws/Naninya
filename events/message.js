@@ -21,8 +21,9 @@ module.exports = async (bot, message) => {
 	if (message.content.match(mentionRegex)) {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`)
+		} else {
+			message.channel.send(prefixhelp);
 		}
-		message.channel.send(prefixhelp);
 	}
 	let args = message.content.slice(bot.prefix.length).trim().split(/ +/g);
 	let cmd = args.shift().toLowerCase();
