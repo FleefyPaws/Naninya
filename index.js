@@ -9,8 +9,7 @@ const bot = new Client({
 
 bot.prefix = config.prefix;
 bot.config = config;
-require('server')
 ["aliases", "commands"].forEach(x => bot[x] = new Collection());
-['event', 'command'].forEach(x => require(`./handlers/${x}`)(bot));
+['event', 'command', 'server'].forEach(x => require(`./handlers/${x}`)(bot));
 
 bot.login(process.env.TOKEN);
