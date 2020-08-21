@@ -1,8 +1,8 @@
 const express = require('express');
-const router = express.Router();
+const app = express();
 
 
-router.get("/", function(request, response) {
+app.get("/", function(request, response) {
     response.sendFile(__dirname + "/webpage/index.html");
 });
 module.exports = router
