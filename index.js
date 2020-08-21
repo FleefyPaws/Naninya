@@ -6,9 +6,6 @@ const config = require("./config.json");
 const bot = new Client({
     partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/webpage/index.html");
-});
 
 bot.prefix = config.prefix;
 bot.config = config;
