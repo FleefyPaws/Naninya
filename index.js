@@ -2,8 +2,6 @@ const {
     Client,
     Collection,
 } = require("discord.js");
-const express = require('request');
-const app = express();
 const config = require("./config.json");
 const bot = new Client({
     partials: ["MESSAGE", "CHANNEL", "REACTION"]
@@ -14,7 +12,7 @@ app.get("/", (request, response) => {
 
 bot.prefix = config.prefix;
 bot.config = config;
-
+require('server.js')
 ["aliases", "commands"].forEach(x => bot[x] = new Collection());
 ['event', 'command'].forEach(x => require(`./handlers/${x}`)(bot));
 
