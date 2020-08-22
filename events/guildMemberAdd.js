@@ -9,6 +9,18 @@ const {
  * @param {GuildMember} member
  */
 module.exports = async (bot, member) => {
+    const statuses = [
+        `${bot.guilds.cache.size} servers!`,
+        `${bot.users.cache.size} users!`,
+        `Now has ${bot.commands.size} Commands`
+    ];
+
+    setInterval(() => {
+        const status = statuses[Math.floor(Math.random() * statuses.length)];
+        bot.user.setActivity(status, {
+            type: 'LISTENING'
+        });
+    }, 5000);
     if (member.guild.id !== '743730169075728414') {
         return;
     } else {
