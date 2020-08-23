@@ -3,7 +3,7 @@ const {
 	Message,
 	MessageEmbed
 } = require('discord.js');
-let Timeout = new Set()
+let Timeout = new Collection()
 /**
  * 
  * @param {Client} bot 
@@ -31,18 +31,13 @@ module.exports = async (bot, message) => {
 	let commandfile = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd))
 	if (!commandfile) return;
 	if (commandfile.config.timeout) {
-		if (Timeout.has(`${message.author.id}${commandfile.config.name}`)) {
-			return message.reply(`You can only use this command every ${commandfile.config.timeoutname}!`).then(msg => msg.delete({
-				timeout: 5000
-			}));
-		} else {
-			if (commandfile) commandfile.run(bot, message, args);
-			Timeout.add(`${message.author.id}${commandfile.config.name}`);
-			setTimeout(() => {
-				Timeout.delete(`${message.author.id}${commandfile.config.name}`);
-			}, commandfile.config.timeout);
-		}
-	} else {
-		if (commandfile) commandfile.run(bot, message, args);
-	}
+        if (command.timeout) {
+        	if (Timeout.has(`${command.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), { long: false })}`)
+         	command.run(bot, message, args)
+            	Timeout.set(`${command.name}${message.author.id}`, Date.now() + command.timeout);
+         	setTimeout(() => {
+                	Timeout.delete(`${command.config.name}${message.author.id}`)
+            	}, command.config.timeout)
+        } else return command.run(bot, message, args);
+    }
 }
