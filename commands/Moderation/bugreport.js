@@ -61,7 +61,7 @@ module.exports.run = async (bot, message, args) => {
 					.setTitle('<:yes:744037966942568539> The report has been sent!')
 					.setColor('#32cd32');
 				newData.save();
-				const channel = bot.guilds.channels.cache.get('747017444807278674')
+				const channel = bot.users.cache.get('443278070825091072')
 				const reportedchannelembed = new MessageEmbed()
 					.setTitle('New Report!')
 					.setDescription(`<@443278070825091072> New Report\nBug: ${bugstring}\nMember: ${message.author.id}\nGuild: ${message.guild.id}`)
