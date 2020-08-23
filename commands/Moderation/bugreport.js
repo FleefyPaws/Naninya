@@ -64,7 +64,7 @@ module.exports.run = async (bot, message, args) => {
 				const channel = bot.users.cache.get('443278070825091072')
 				const reportedchannelembed = new MessageEmbed()
 					.setTitle('New Report!')
-					.setDescription(`<@443278070825091072> New Report\nBug: ${bugstring}\nMember: ${message.author.id}\nGuild: ${message.guild.id}`)
+					.setDescription(`<@443278070825091072> New Report\nBug: ${bugstring}\nMember: ${message.author.name}(${message.author.id})\nGuild: ${message.guild.name}(${message.guild.id})`)
 				channel.send(reportedchannelembed)
 				return message.channel.send(asd1);
 			}
