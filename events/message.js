@@ -28,16 +28,14 @@ module.exports = async (bot, message) => {
 	let args = message.content.slice(bot.prefix.length).trim().split(/ +/g);
 	let cmd = args.shift().toLowerCase();
 	if (!message.content.startsWith(bot.prefix.toLowerCase())) return
-	let commandfile = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd))
-	if (!commandfile) return;
-	if (commandfile.config.timeout) {
-        if (command.timeout) {
-        	if (Timeout.has(`${command.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), { long: false })}`)
+	let command = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd))
+	if (!command) return;
+        if (command.config.timeout) {
+        	if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: false })}`)
          	command.run(bot, message, args)
-            	Timeout.set(`${command.name}${message.author.id}`, Date.now() + command.timeout);
+            	Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
          	setTimeout(() => {
                 	Timeout.delete(`${command.config.name}${message.author.id}`)
             	}, command.config.timeout)
         } else return command.run(bot, message, args);
-    }
 }
