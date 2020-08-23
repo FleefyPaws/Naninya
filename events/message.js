@@ -33,7 +33,7 @@ module.exports = async (bot, message) => {
 	let command = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd))
 	if (!command) return;
         if (command.config.timeout) {
-        	if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: false })}`)
+        	if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: true })}`)
          	command.run(bot, message, args)
             	Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
          	setTimeout(() => {
