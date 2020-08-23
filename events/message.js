@@ -4,6 +4,7 @@ const {
 	Collection,
 	MessageEmbed
 } = require('discord.js');
+const ms =  require('ms')
 let Timeout = new Collection()
 /**
  * 
