@@ -57,7 +57,6 @@ module.exports.config = {
 	description: 'Creates an embed',
 	usage: '<COLOR> <DESC>',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Members',
 	category: 'Miscellaneous'
 };

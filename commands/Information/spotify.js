@@ -61,6 +61,5 @@ module.exports.config = {
 	description: 'See the spotify song the user is listening to',
 	usage: '[USER]',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Information'
 };

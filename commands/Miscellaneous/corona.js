@@ -32,7 +32,9 @@ module.exports.run = async (bot, message, args) => {
 					}));
 				}
 				const country = data.country.toLocaleString();
-				const { flag } = data.countryInfo;
+				const {
+					flag
+				} = data.countryInfo;
 				const confirmed = data.cases.toLocaleString();
 				const todayconfirmed = data.todayCases.toLocaleString();
 				const deaths = data.deaths.toLocaleString();
@@ -77,6 +79,5 @@ module.exports.config = {
 	accessableby: 'Members',
 	category: 'Miscellaneous',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	aliases: ['covid']
 };

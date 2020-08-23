@@ -69,6 +69,5 @@ module.exports.config = {
 	accessableby: 'Members',
 	category: 'Fun',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	aliases: ['cp', 'cf']
 };

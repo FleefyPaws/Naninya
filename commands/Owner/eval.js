@@ -66,6 +66,5 @@ module.exports.config = {
     usage: "<CODE>",
     category: 'Owner',
     timeout: 5000,
-    timeoutname: '5 seconds',
     accessableby: "Owner"
 }

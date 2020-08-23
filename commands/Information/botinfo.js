@@ -73,6 +73,5 @@ module.exports.config = {
 	accessableby: 'Members',
 	category: 'Information',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	aliases: ['botstats', 'botstat', 'bui']
 };

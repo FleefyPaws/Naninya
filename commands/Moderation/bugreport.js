@@ -1,7 +1,15 @@
 const {
-	MessageEmbed
+	MessageEmbed,
+	Client,
+	Message
 } = require('discord.js');
 const Bug = require('../../models/bugreport');
+/**
+ * 
+ * @param {Client} bot 
+ * @param {Message} message 
+ * @param {String[]} args 
+ */
 module.exports.run = async (bot, message, args) => {
 	try {
 		const nopermembed = new MessageEmbed()
@@ -53,6 +61,11 @@ module.exports.run = async (bot, message, args) => {
 					.setTitle('<:yes:744037966942568539> The report has been sent!')
 					.setColor('#32cd32');
 				newData.save();
+				const channel = bot.guilds.channels.cache.get('747017444807278674')
+				const reportedchannelembed = new MessageEmbed()
+					.setTitle('New Report!')
+					.setDescription(`<@443278070825091072> New Report\nBug: ${bugstring}\nMember: ${message.author.id}\nGuild: ${message.guild.id}`)
+				channel.send(reportedchannelembed)
 				return message.channel.send(asd1);
 			}
 		});
@@ -72,7 +85,6 @@ module.exports.config = {
 	usage: '<MEMBER>',
 	category: 'Moderation',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Moderator',
 	aliases: ['rep', 'report']
 };

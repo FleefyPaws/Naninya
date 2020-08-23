@@ -84,7 +84,6 @@ module.exports.config = {
 	usage: `<#CHANNEL> <DESCRIPTION>`,
 	accessableby: 'Moderators',
 	timeout: 3000,
-	timeoutname: '3 seconds',
 	category: 'Moderation',
 	aliases: ['b', 'bam']
 };

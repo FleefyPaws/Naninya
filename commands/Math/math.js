@@ -53,6 +53,5 @@ module.exports.config = {
 	usage: '<NUMBER1> <NUMBER2>',
 	accessableby: 'Members',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Math'
 };

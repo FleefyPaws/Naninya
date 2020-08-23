@@ -218,6 +218,5 @@ module.exports.config = {
 	usage: '[USER]',
 	category: 'Information',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	aliases: ['ui', 'user', 'whois', 'who']
 };

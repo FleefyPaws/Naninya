@@ -132,7 +132,6 @@ module.exports.config = {
 	usage: '<MEMBER>',
 	category: 'Moderation',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Moderator',
 	aliases: ['k', 'kik']
 };

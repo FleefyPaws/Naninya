@@ -76,7 +76,6 @@ module.exports.config = {
 	description: 'Show the weather of a specific place',
 	usage: '<PLACE>',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Members',
 	category: 'Miscellaneous'
 };

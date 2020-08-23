@@ -49,5 +49,6 @@ module.exports.config = {
 	description: 'Cube Root Of The Given Number',
 	usage: '<NUMBER>',
 	accessableby: 'Members',
+	timeout: 5000,
 	category: 'Math'
 };

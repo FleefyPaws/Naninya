@@ -35,7 +35,6 @@ module.exports.config = {
 	description: "Views a user's avatar",
 	usage: '[USER]',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Members',
 	category: 'Information'
 };

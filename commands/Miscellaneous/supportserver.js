@@ -27,6 +27,5 @@ module.exports.config = {
 	description: 'An invite link for the bot support server',
 	accessableby: 'Members',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Miscellaneous'
 };

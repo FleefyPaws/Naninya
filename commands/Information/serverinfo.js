@@ -109,6 +109,5 @@ module.exports.config = {
 	description: 'Server info',
 	category: 'Information',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	aliases: ['server', 'guild', 'si', 'gi', 'guildinfo']
 };

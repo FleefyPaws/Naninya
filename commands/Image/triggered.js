@@ -37,6 +37,5 @@ module.exports.config = {
 	usage: '[MEMBER]',
 	accessableby: 'Members',
 	category: 'Image',
-	timeout: '5000',
-	timeoutname: '5 seconds'
+	timeout: 5000
 };

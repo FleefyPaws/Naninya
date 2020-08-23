@@ -48,6 +48,5 @@ module.exports.config = {
 	description: 'Shows the latency',
 	accessableby: 'Members',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Miscellaneous'
 };

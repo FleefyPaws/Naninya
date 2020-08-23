@@ -96,7 +96,6 @@ module.exports.config = {
 	usage: '<USER>',
 	accessableby: 'Moderators',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Moderation',
 	aliases: ['ub', 'unbam']
 };

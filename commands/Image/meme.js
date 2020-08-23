@@ -13,7 +13,9 @@ module.exports.run = async (bot, message, args) => {
 		message.channel.startTyping();
 		fetch('https://www.reddit.com/r/memes/random/.json')
 			.then(res => res.json()).then(body => {
-				const { permalink } = body[0].data.children[0].data;
+				const {
+					permalink
+				} = body[0].data.children[0].data;
 				const memeUrl = `https://reddit.com${permalink}`;
 				const memeImage = body[0].data.children[0].data.url;
 				const memeTitle = body[0].data.children[0].data.title;
@@ -44,6 +46,5 @@ module.exports.config = {
 	accessableby: 'Members',
 	category: 'Image',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	aliases: ['memes', 'memey']
 };

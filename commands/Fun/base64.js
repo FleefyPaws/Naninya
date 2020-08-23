@@ -97,6 +97,5 @@ module.exports.config = {
 	usage: '<ENCODE | DECODE> <TEXT>',
 	accessableby: 'Members',
 	category: 'Fun',
-	timeout: 5000,
-	timeoutname: '5 seconds'
+	timeout: 5000
 };

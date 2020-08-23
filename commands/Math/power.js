@@ -63,5 +63,6 @@ module.exports.config = {
 	description: 'Displays the power of the given number with the given power',
 	usage: '<NUMBER> <POWER>',
 	accessableby: 'Members',
+	timeout: 3000,
 	category: 'Math'
 };

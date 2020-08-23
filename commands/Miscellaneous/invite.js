@@ -29,6 +29,5 @@ module.exports.config = {
 	usage: '[COUNTRY]',
 	accessableby: 'Members',
 	category: 'Miscellaneous',
-	timeout: 5000,
-	timeoutname: '5 seconds'
+	timeout: 5000
 };

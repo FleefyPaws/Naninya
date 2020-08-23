@@ -59,8 +59,8 @@ module.exports.run = async (bot, message, args) => {
 			.setColor('#FF0000');
 		const modLogChannel = message.guild.channels.cache.find(cha => cha.name === 'mod-logs');
 		Mute.findOne({
-			GuildID: message.guild.id
-		},
+				GuildID: message.guild.id
+			},
 			async (err, data1) => {
 				if (err) console.log(err);
 				if (!data1) {
@@ -163,7 +163,6 @@ module.exports.config = {
 	usage: '<MEMBER> [TIME] [REASON]',
 	category: 'Moderation',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Moderators',
 	aliases: ['m', 'shh']
 };

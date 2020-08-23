@@ -56,6 +56,5 @@ module.exports.config = {
 	usage: '<CHOISE1> <CHOISE2>',
 	accessableby: 'Members',
 	timeout: 3000,
-	timeoutname: '3 seconds',
 	category: 'Fun'
 };

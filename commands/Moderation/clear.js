@@ -89,6 +89,5 @@ module.exports.config = {
 	accessableby: 'Moderators',
 	category: 'Moderation',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	aliases: ['c', 'purge']
 };

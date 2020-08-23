@@ -1,12 +1,16 @@
 const roast = require('roastme');
-const { MessageEmbed } = require('discord.js');
+const {
+	MessageEmbed
+} = require('discord.js');
 module.exports.run = async (bot, message, args) => {
 	try {
 		const roaster = roast.random();
 		const member = await message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]) || args.slice(0).join(' ') ? args.slice(0).join(' ') : message.member;
 		if (member.id === '714009112605622332') {
 			return message.reply(`🔥 Your dumbass really thought I was going to roast myself?`);
-		} else if (member.id === '443278070825091072') { return message.reply(`🔥 Your dumbass really thought I was going to roast my owner?`); }
+		} else if (member.id === '443278070825091072') {
+			return message.reply(`🔥 Your dumbass really thought I was going to roast my owner?`);
+		}
 		message.channel.send(`${member}, 🔥 ${roaster}`);
 	} catch (err) {
 		console.log(err);
@@ -24,6 +28,5 @@ module.exports.config = {
 	accessableby: 'Members',
 	timeout: 2000,
 	usage: '<MEMBER>',
-	timeoutname: '2 seconds',
 	category: 'Fun'
 };

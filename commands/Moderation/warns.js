@@ -48,9 +48,9 @@ module.exports.run = async (bot, message, args) => {
 			}));
 		}
 		Warn.find({
-			Guild: message.guild.id,
-			User: user.id
-		},
+				Guild: message.guild.id,
+				User: user.id
+			},
 			async (err, data) => {
 				if (err) console.log(err);
 				if (!data) {
@@ -88,7 +88,6 @@ module.exports.config = {
 	description: 'Unmutes a memeber (Only works if you muted using the bot!)',
 	usage: '<MEMBER> <REASON>',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Moderation',
 	accessableby: 'Moderators'
 };

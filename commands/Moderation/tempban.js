@@ -101,7 +101,6 @@ module.exports.config = {
 	usage: '<MEMBER> <NUMBER OF DAYS> [REASON]',
 	accessableby: 'Moderators',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Moderation',
 	aliases: ['tb', 'tbam']
 };

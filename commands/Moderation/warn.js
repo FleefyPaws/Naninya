@@ -50,9 +50,9 @@ module.exports.run = async (bot, message, args) => {
 		let reason = args.slice(1).join(' ');
 		if (!reason) reason = 'No reason provided';
 		Warn.findOne({
-			Guild: message.guild.id,
-			User: user.id
-		},
+				Guild: message.guild.id,
+				User: user.id
+			},
 			async (err, data) => {
 				if (err) console.log(err);
 				if (!data) {
@@ -99,7 +99,6 @@ module.exports.config = {
 	usage: '<MEMBER> <REASON>',
 	category: 'Moderation',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Moderators',
 	aliases: ['w']
 };

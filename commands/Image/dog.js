@@ -38,7 +38,6 @@ module.exports.config = {
 	description: 'Summons a dog picture',
 	accessableby: 'Members',
 	category: 'Image',
-	timeout: '5000',
-	timeoutname: '5 seconds',
+	timeout: 5000,
 	aliases: ['dogs', 'doggo', 'pup', 'puppy', 'doge']
 };

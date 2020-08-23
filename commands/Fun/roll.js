@@ -95,7 +95,6 @@ module.exports.config = {
 	description: 'Rolls dice upto 60 times in a row!',
 	usage: '[DICE]',
 	timeout: 2000,
-	timeoutname: '2 seconds',
 	accessableby: 'Members',
 	category: 'Fun'
 };

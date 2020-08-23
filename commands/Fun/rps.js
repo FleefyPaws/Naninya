@@ -61,6 +61,5 @@ module.exports.config = {
 	description: 'Play rock paper scissors with the bot',
 	accessableby: 'Members',
 	timeout: 2000,
-	timeoutname: '2 seconds',
 	category: 'Fun'
 };

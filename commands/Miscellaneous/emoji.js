@@ -46,6 +46,5 @@ module.exports.config = {
 	description: 'Views all the emoji in the server',
 	accessableby: 'Member',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	category: 'Miscellaneous'
 };

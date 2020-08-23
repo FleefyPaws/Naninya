@@ -45,13 +45,10 @@ module.exports.run = async (bot, message, args) => {
 		const setupmuteroleembed = new MessageEmbed()
 			.setTitle(`❌ Please set the mute role by using the command \`${bot.prefix}setmuterole <ROLE-MENTION | ROLEID>\``)
 			.setColor('#FF0000');
-		const enablemuteroleembed = new MessageEmbed()
-			.setTitle(`❌ Please enable the mute role by using the command \`${bot.prefix}enablemuterole\``)
-			.setColor('#FF0000');
 		var modLogChannel = message.guild.channels.cache.find(cha => cha.name === 'mod-logs');
 		Mute.findOne({
-			GuildID: message.guild.id
-		},
+				GuildID: message.guild.id
+			},
 			async (err, data1) => {
 				if (err) console.log(err);
 				if (!data1) {
@@ -108,7 +105,6 @@ module.exports.config = {
 	usage: '<MEMBER>',
 	category: 'Moderation',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Moderators',
 	aliases: ['unm', 'unshh']
 };
