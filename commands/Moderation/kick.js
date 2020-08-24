@@ -17,9 +17,12 @@ module.exports.run = async (bot, message, args) => {
 		}
 		if (!message.member.hasPermission('KICK_MEMBERS')) {
 			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const nulluserembed = new MessageEmbed()
 			.setTitle('❌ Please give the ID or mention a valid member')
@@ -30,9 +33,12 @@ module.exports.run = async (bot, message, args) => {
 		}
 		if (!user) {
 			message.delete();
-			return message.channel.send(nulluserembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nulluserembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const higherroleembed = new MessageEmbed()
 			.setTitle('❌ You cannot kick people who has the same role or a role above you')
@@ -42,15 +48,21 @@ module.exports.run = async (bot, message, args) => {
 			.setColor('#FF0000');
 		if (!user.kickable) {
 			message.delete();
-			return message.channel.send(higherroleembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(higherroleembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (user.id === message.member.id) {
 			message.delete();
-			return message.channel.send(dumb).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(dumb).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		let reason = args.slice(1).join(' ');
 		if (!reason) reason = 'No reason provided!';

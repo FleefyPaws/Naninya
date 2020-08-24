@@ -7,9 +7,6 @@ module.exports.run = async (bot, message) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
-		}
 		message.channel.startTyping();
 		fetch('https://some-random-api.ml/img/cat').then(res => res.json()).then(body => {
 			if (!body) return message.channel.send('Sorry i\'v broke!');

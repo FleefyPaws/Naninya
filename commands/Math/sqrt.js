@@ -6,27 +6,30 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		const sqrt = args[0];
 		if (!sqrt) {
 			message.delete();
 			const err1 = new MessageEmbed()
 				.setTitle('❌ Please provide the number')
 				.setColor('#FF0000');
-			return message.channel.send(err1).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err1).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (isNan(sqrt)) {
 			message.delete();
 			const err1 = new MessageEmbed()
 				.setTitle('❌ Please provide the number')
 				.setColor('#FF0000');
-			return message.channel.send(err1).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err1).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const embed = new MessageEmbed()
 			.setColor('#32cd32')

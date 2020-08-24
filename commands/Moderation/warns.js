@@ -13,39 +13,39 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
 		}
-		if (!message.guild.me.hasPermission('BAN_MEMBERS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Ban Members** Permission`);
-		}
-		if (!message.guild.me.hasPermission('KICK_MEMBERS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Kick Members** Permission`);
-		}
-		if (!message.guild.me.hasPermission('MANAGE_ROLES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Roles** Permission`);
-		}
-		if (!message.member.hasPermission(['MANAGE_ROLES', 'MANAGE_MESSAGES'])) {
+		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
-		const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+		const user = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]);
 		const nulluserembed = new MessageEmbed()
 			.setTitle('❌ Please give the ID or mention a valid member')
 			.setColor('#FF0000');
 		if (!user) {
 			message.delete();
-			return message.channel.send(nulluserembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nulluserembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const dumb = new MessageEmbed()
 			.setTitle('❌ You really dumb?')
 			.setColor('#FF0000');
 		if (user.id === message.member.id) {
 			message.delete();
-			return message.channel.send(dumb).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(dumb).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		Warn.find({
 				Guild: message.guild.id,
@@ -57,7 +57,12 @@ module.exports.run = async (bot, message, args) => {
 					const nowarnsembed = new MessageEmbed()
 						.setTitle(`❌ ${user.user.tag} Has Not Got Any Warns In This Guild`)
 						.setColor('#FF0000');
-					return message.channel.send(nowarnsembed);
+					return message.channel.send(nowarnsembed).then(msg => {
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+						else msg.delete({
+							timeout: 5000
+						})
+					});
 				} else {
 					const Embed = new MessageEmbed()
 						.setDescription(

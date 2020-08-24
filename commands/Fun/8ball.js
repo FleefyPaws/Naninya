@@ -6,18 +6,18 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
-		}
 		const question = args.slice(0).join(' ');
 		if (!question) {
 			message.delete();
 			const nopermembed = new MessageEmbed()
 				.setTitle('❌ You did not specify your question!')
 				.setColor('#FF0000');
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const responses = [
 			'Yes',

@@ -2,6 +2,9 @@ const {
 	MessageEmbed
 } = require('discord.js');
 const Mute = require('../../models/muterole');
+const {
+	isNull
+} = require('lodash');
 
 module.exports.run = async (bot, message, args) => {
 	try {
@@ -23,24 +26,30 @@ module.exports.run = async (bot, message, args) => {
 				timeout: 5000
 			}));
 		}
-		const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+		const user = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]) ? message.guild.members.cache.get(args[0]) : null;
 		const nulluserembed = new MessageEmbed()
 			.setTitle('❌ Please give the ID or mention a valid member')
 			.setColor('#FF0000');
-		if (!user) {
+		if (!user === null) {
 			message.delete();
-			return message.channel.send(nulluserembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nulluserembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const dumb = new MessageEmbed()
 			.setTitle('❌ You really dumb?')
 			.setColor('#FF0000');
 		if (user.id === message.member.id) {
 			message.delete();
-			return message.channel.send(dumb).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(dumb).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const setupmuteroleembed = new MessageEmbed()
 			.setTitle(`❌ Please set the mute role by using the command \`${bot.prefix}setmuterole <ROLE-MENTION | ROLEID>\``)
@@ -72,12 +81,20 @@ module.exports.run = async (bot, message, args) => {
 					const earlymutedembed = new MessageEmbed()
 						.setTitle(`❌ ${user} is already unmuted`)
 						.setColor('#FF0000');
-					if (!user.roles.cache.some(role => role.id === data.RoleID)) return message.channel.send(earlymutedembed);
+					if (!user.roles.cache.some(role => role.id === data.RoleID)) return message.channel.send(earlymutedembed).then(msg => {
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+						else msg.delete({
+							timeout: 5000
+						})
+					});
 					message.guild.member(user).roles.remove(muteRole.id);
 					message.delete();
-					message.channel.send(sucessembed).then(msg => msg.delete({
-						timeout: 5000
-					}));
+					message.channel.send(sucessembed).then(msg => {
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+						else msg.delete({
+							timeout: 5000
+						})
+					});
 					if (!modLogChannel) {
 						if (Math.random() * 100 < 5) {
 							return message.channel.send('You can receive mod-logs in a channel by creating a channel called `mod-logs`');

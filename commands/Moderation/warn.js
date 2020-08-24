@@ -13,16 +13,7 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
 		}
-		if (!message.guild.me.hasPermission('BAN_MEMBERS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Ban Members** Permission`);
-		}
-		if (!message.guild.me.hasPermission('KICK_MEMBERS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Kick Members** Permission`);
-		}
-		if (!message.guild.me.hasPermission('MANAGE_ROLES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Roles** Permission`);
-		}
-		if (!message.member.hasPermission(['MANAGE_ROLES', 'MANAGE_MESSAGES'])) {
+		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 			message.delete();
 			return message.channel.send(nopermembed).then(msg => msg.delete({
 				timeout: 5000
@@ -34,18 +25,24 @@ module.exports.run = async (bot, message, args) => {
 			.setColor('#FF0000');
 		if (!user) {
 			message.delete();
-			return message.channel.send(nulluserembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nulluserembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const dumb = new MessageEmbed()
 			.setTitle('❌ You really dumb?')
 			.setColor('#FF0000');
 		if (user.id === message.member.id) {
 			message.delete();
-			return message.channel.send(dumb).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(dumb).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		let reason = args.slice(1).join(' ');
 		if (!reason) reason = 'No reason provided';
@@ -69,7 +66,12 @@ module.exports.run = async (bot, message, args) => {
 						.setTitle(`<:yes:744037966942568539> \`${user.user.username}\` Has Been Warned`)
 						.setDescription(`Reason: **${reason}** \nWarns: **1**`)
 						.setColor('#32cd32');
-					message.channel.send(successembed);
+					message.channel.send(successembed).then(msg => {
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+						else msg.delete({
+							timeout: 5000
+						})
+					});
 				} else {
 					data.Warns.unshift({
 						Moderator: message.author.id,
@@ -80,7 +82,12 @@ module.exports.run = async (bot, message, args) => {
 						.setTitle(`<:yes:744037966942568539> \`${user.user.username}\` Has Been Warned`)
 						.setDescription(`Reason: **${reason}** \nWarns: **${data.Warns.length}**`)
 						.setColor('#32CD32');
-					message.channel.send(successembed);
+					message.channel.send(successembed).then(msg => {
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+						else msg.delete({
+							timeout: 5000
+						})
+					});
 				}
 			});
 	} catch (err) {

@@ -4,13 +4,14 @@ const {
 	Collection,
 	MessageEmbed
 } = require('discord.js');
-const ms =  require('ms')
+const ms = require('ms')
 let Timeout = new Collection()
 /**
  * 
  * @param {Client} bot 
  * @param {Message} message
  */
+const mongoCurrency = require('discord-mongo-currency');
 module.exports = async (bot, message) => {
 	if (!message.guild || message.author.bot) return;
 	const mentionRegex = RegExp(`^<@!${bot.user.id}>$`);
@@ -32,12 +33,12 @@ module.exports = async (bot, message) => {
 	if (!message.content.startsWith(bot.prefix.toLowerCase())) return
 	let command = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd))
 	if (!command) return;
-        if (command.config.timeout) {
-        	if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: true })}`)
-         	command.run(bot, message, args)
-            	Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
-         	setTimeout(() => {
-                	Timeout.delete(`${command.config.name}${message.author.id}`)
-            	}, command.config.timeout)
-        } else return command.run(bot, message, args);
+	if (command.config.timeout) {
+		if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: true })}`)
+		command.run(bot, message, args)
+		Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
+		setTimeout(() => {
+			Timeout.delete(`${command.config.name}${message.author.id}`)
+		}, command.config.timeout)
+	} else return command.run(bot, message, args);
 }

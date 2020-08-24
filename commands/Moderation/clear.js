@@ -15,27 +15,36 @@ module.exports.run = async (bot, message, args) => {
 		}
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const isnanembed = new MessageEmbed()
 			.setTitle(`❌ ${args[0]} is not a number.`)
 			.setColor('#FF0000');
 		if (isNaN(args[0])) {
 			message.delete();
-			return message.channel.send(isnanembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(isnanembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const zeroembed = new MessageEmbed()
 			.setTitle(`❌ I cannot delete \`0\` messages`)
 			.setColor('#FF0000');
 		if (parseInt(args[0]) <= 0) {
 			message.delete();
-			message.channel.send(zeroembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			message.channel.send(zeroembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		let deleteAmount;
 		if (parseInt(args[0]) >= 100) {
@@ -55,9 +64,12 @@ module.exports.run = async (bot, message, args) => {
 			.then(deleted => {
 				deletedembed.setTitle(`<:yes:744037966942568539> Deleted \`${deleted.size}\` messages.`);
 				deletedembed.setColor('#32CD32');
-				message.channel.send(deletedembed).then(msg => msg.delete({
-					timeout: 5000
-				}));
+				message.channel.send(deletedembed).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+					else msg.delete({
+						timeout: 5000
+					})
+				});
 				modLogEmbed.addField('**Action:** Message Deleted', [
 					`**Moderator:** ${message.author.tag}`,
 					`**Message Delelted:** ${deleted.size} Messages`

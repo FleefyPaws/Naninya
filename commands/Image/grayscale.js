@@ -6,9 +6,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
-		}
 		const member = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]) || message.member;
 		const avatar = member.user.displayAvatarURL({
 			format: 'png',
@@ -16,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
 			size: 2048
 		});
 		const embed = new MessageEmbed()
-			.setColor(0xFFFF00)
+			.setColor('#32cd32')
 			.setTitle(`${member.user.username} has been grayscaled:`)
 			.setImage(`https://some-random-api.ml/canvas/greyscale?avatar=${avatar}`)
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);

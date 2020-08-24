@@ -3,10 +3,18 @@ const {
 } = require('discord.js');
 module.exports.run = async (bot, message) => {
 	try {
+		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+			return message.channel.send(`Please give the bot **Embed Links** Permission`);
+		}
+		if (!message.guild.me.hasPermission('ADD_REACTIONS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+			return message.channel.send(`Please give the bot **Embed Links** Permission`);
+		}
 		const chooseArr = ['🗻', '📰', '✂'];
 		const embed = new MessageEmbed()
 			.setColor('#32cd32')
-			.setFooter(message.guild.me.displayName, bot.user.displayAvatarURL)
+			.setFooter(message.guild.me.displayName, bot.user.displayAvatarURL({
+				dynamic: true
+			}))
 			.setDescription('Add a reaction to one of these emojis to play the game!')
 			.setTimestamp();
 

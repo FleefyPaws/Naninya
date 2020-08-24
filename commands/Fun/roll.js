@@ -3,6 +3,9 @@ const {
 } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
 	try {
+		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+			return message.channel.send(`Please give the bot **Embed Links** Permission`);
+		}
 		if (!args[0]) {
 			const dice = [
 				`<:1:731504590050164857> (1)`,

@@ -12,8 +12,8 @@
   "dependencies": {
     "ascii-table": "0.0.9",
     "common-tags": "^1.8.0",
-    "express": "^4.17.1",
     "discord.js": "^12.2.0",
+    "express": "^4.17.1",
     "lodash": "^4.17.19",
     "mathjs": "^7.1.0",
     "moment": "^2.27.0",

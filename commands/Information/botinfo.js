@@ -17,9 +17,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		const core = os.cpus()[0];
 		const embed = new MessageEmbed()
 			.setThumbnail(bot.user.displayAvatarURL())

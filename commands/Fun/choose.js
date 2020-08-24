@@ -3,6 +3,9 @@ const {
 } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
 	try {
+		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+			return message.channel.send(`Please give the bot **Embed Links** Permission`);
+		}
 		const response = [
 			`${args[0]}`,
 			`${args[1]}`
@@ -10,26 +13,29 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
-		}
 		if (!args[0]) {
 			message.delete();
 			const nopermembed = new MessageEmbed()
 				.setTitle('❌ Please provide the first choise')
 				.setColor('#FF0000');
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (!args[0]) {
 			message.delete();
 			const nopermembed = new MessageEmbed()
 				.setTitle('❌ Please provide the second choise')
 				.setColor('#FF0000');
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const xander = response[Math.floor(Math.random() * response.length)];
 		message.channel.startTyping();

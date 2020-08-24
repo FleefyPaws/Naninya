@@ -7,27 +7,30 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		weather.find({
 			search: args.join(' '),
 			degreeType: 'C'
 		}, (error, result) => {
 			if (error) {
 				message.delete();
-				return message.channel.send(error).then(msg => msg.delete({
-					timeout: 5000
-				}));
+				return message.channel.send(error).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+					else msg.delete({
+						timeout: 5000
+					})
+				});
 			}
 			if (!args[0]) {
 				message.delete();
 				const errembed = new MessageEmbed()
 					.setTitle('❌ Please provide a location.')
 					.setColor('#FF0000');
-				return message.channel.send(errembed).then(msg => msg.delete({
-					timeout: 5000
-				}));
+				return message.channel.send(errembed).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+					else msg.delete({
+						timeout: 5000
+					})
+				});
 			}
 
 			if (result === undefined || result.length === 0) {
@@ -35,9 +38,12 @@ module.exports.run = async (bot, message, args) => {
 				const errembed = new MessageEmbed()
 					.setTitle('❌ Invalid location.')
 					.setColor('#FF0000');
-				return message.channel.send(errembed).then(msg => msg.delete({
-					timeout: 5000
-				}));
+				return message.channel.send(errembed).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+					else msg.delete({
+						timeout: 5000
+					})
+				});
 			}
 			var {
 				current

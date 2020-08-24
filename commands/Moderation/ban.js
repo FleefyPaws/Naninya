@@ -9,9 +9,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		if (!message.guild.me.hasPermission('MANAGE_ROLES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Manage Roles** Permission`);
 		}
@@ -20,9 +17,12 @@ module.exports.run = async (bot, message, args) => {
 		}
 		if (!message.member.hasPermission('BAN_MEMBERS')) {
 			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const higherroleembed = new MessageEmbed()
 			.setTitle('❌ You Cannot Ban People Who Has The Same Role Or A Role Above You')
@@ -39,21 +39,30 @@ module.exports.run = async (bot, message, args) => {
 			.setColor('#FF0000');
 		if (!user) {
 			message.delete();
-			return message.reply(nulluserembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.reply(nulluserembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (!user.kickable) {
 			message.delete();
-			return message.channel.send(higherroleembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(higherroleembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (user.id === message.member.id) {
 			message.delete();
-			return message.channel.send(dumb).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(dumb).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		let reason = args.slice(1).join(' ');
 		if (!reason) reason = 'No reason provided!';
@@ -86,9 +95,10 @@ module.exports.run = async (bot, message, args) => {
 		await user.send(sucessembed).then(() => {
 			user.ban(reason);
 			message.channel.send(sucessembed).then(msg => {
-				msg.delete({
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
 					timeout: 5000
-				});
+				})
 			});
 			if (!modLogChannel) {
 				if (Math.random() * 100 < 3) {

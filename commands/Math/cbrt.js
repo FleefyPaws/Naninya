@@ -15,18 +15,24 @@ module.exports.run = async (bot, message, args) => {
 			const err1 = new MessageEmbed()
 				.setTitle('❌ Please provide the number')
 				.setColor('#FF0000');
-			return message.channel.send(err1).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err1).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (isNan(cbrt)) {
 			message.delete();
 			const err1 = new MessageEmbed()
 				.setTitle('❌ Please provide the number')
 				.setColor('#FF0000');
-			return message.channel.send(err1).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err1).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const embed = new MessageEmbed()
 			.setColor('#32cd32')

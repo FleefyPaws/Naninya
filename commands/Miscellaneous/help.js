@@ -50,7 +50,8 @@ module.exports.run = async (bot, message, args) => {
             **Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
             **Description:** ${command.description || 'No Description provided.'}
             **Usage:** ${command.usage ? `\`${bot.prefix}${command.name} ${command.usage}\`` : `${bot.prefix}${command.name}`}
-            **Accessible by:** ${command.accessableby || 'Members'}
+			**Accessible by:** ${command.accessableby || 'Members'}
+			**Timeout:** ${command.timeout ? `${ms(command.timeout, { long: true })}` : 'None'}
             **Aliases:** ${command.aliases ? command.aliases.join(', ') : 'None.'}`);
 
 			return message.channel.send(embed);

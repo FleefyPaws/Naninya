@@ -15,11 +15,17 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('MANAGE_ROLES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Manage Roles** Permission`);
 		}
+		if (!message.guild.me.hasPermission('BAN_MEMBERS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+			return message.channel.send(`Please give the bot **Manage Roles** Permission`);
+		}
 		if (!message.member.hasPermission('ADMINISTRATOR')) {
 			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		var modLogChannel = message.guild.channels.cache.find(cha => cha.name === 'mod-logs');
 		const invalididembed = new MessageEmbed()
@@ -30,16 +36,22 @@ module.exports.run = async (bot, message, args) => {
 			.setColor('#FF0000');
 		if (isNaN(args[0])) {
 			message.delete();
-			return message.channel.send(isNaNIDembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(isNaNIDembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const bannedMember = await bot.guild.users.cache.get(args[0]);
 		if (!bannedMember) {
 			message.delete();
-			return message.channel.send(invalididembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(invalididembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 
 		let reason = args.slice(1).join(' ');
@@ -54,23 +66,29 @@ module.exports.run = async (bot, message, args) => {
 				`**Reason:** ${reason})`
 			])
 			.setTimestamp()
-			.setFooter(`${bot.config.botname} by ${bot.config.ownername}`);
+			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 		const sucess = new MessageEmbed()
 			.setTitle(`❌ \`${bannedMember}\` has been unbanned from the guild with reason: \`${reason}\` by ${message.author}`)
 			.setColor('#FF0000');
 		try {
 			message.delete();
 			await message.guild.members.unban(bannedMember, reason);
-			return message.channel.send(sucess).then(async (msg) => {
-				msg.delete({
+			return message.channel.send(sucess).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
 					timeout: 5000
-				});
+				})
 			});
 		} catch {
 			const unbannedembed = new MessageEmbed()
 				.setTitle(`❌ ${bannedMember.user.tag} Is Already Unbanned`)
 				.setColor('#FF0000');
-			message.channel.send(unbannedembed);
+			message.channel.send(unbannedembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (!modLogChannel) {
 			if (Math.random() * 100 < 5) {

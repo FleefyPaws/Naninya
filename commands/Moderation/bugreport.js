@@ -23,18 +23,24 @@ module.exports.run = async (bot, message, args) => {
 		}
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const asd = new MessageEmbed()
 			.setTitle('❌ Please say what the bug is!')
 			.setColor('#FF0000');
 		const bugstring = args.slice(0).join(' ');
 		if (!bugstring) {
-			return message.channel.send(asd).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(asd).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		Bug.findOne({
 			UserID: message.member.id
@@ -50,7 +56,12 @@ module.exports.run = async (bot, message, args) => {
 					.setTitle('<:yes:744037966942568539> The report has been sent!')
 					.setColor('#32cd32');
 				newData.save();
-				return message.channel.send(asd1);
+				return message.channel.send(asd1).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+					else msg.delete({
+						timeout: 5000
+					})
+				});
 			} else {
 				const newData = new Bug({
 					UserID: message.author.id,
@@ -66,7 +77,12 @@ module.exports.run = async (bot, message, args) => {
 					.setTitle('New Report!')
 					.setDescription(`<@443278070825091072> New Report\nBug: ${bugstring}\nMember: ${message.author.name}(${message.author.id})\nGuild: ${message.guild.name}(${message.guild.id})`)
 				channel.send(reportedchannelembed)
-				return message.channel.send(asd1);
+				return message.channel.send(asd1).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+					else msg.delete({
+						timeout: 5000
+					})
+				});;
 			}
 		});
 	} catch (err) {

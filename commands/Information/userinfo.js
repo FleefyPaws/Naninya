@@ -94,30 +94,30 @@ module.exports.run = async (bot, message, args) => {
 				}))
 				.setColor(`#32cd32`)
 				.addField('User', [
-					`**❯ Username:** ${member.user.username}`,
-					`**❯ Discriminator:** ${member.user.discriminator}`,
-					`**❯ ID:** ${member.id}`,
-					`**❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
-					`**❯ Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
-					`**❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
-					`**❯ Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
-					`**❯ Game:** ${game1()}`,
+					`**Username:** ${member.user.username}`,
+					`**Discriminator:** ${member.user.discriminator}`,
+					`**ID:** ${member.id}`,
+					`**Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
+					`**Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
+					`**Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
+					`**Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
+					`**Game:** ${game1()}`,
 					`\u200b`
 				])
 				.addField('Member', [
-					`**❯ Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
-					`**❯ Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
-					`**❯ Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
-					`**❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
+					`**Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
+					`**Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
+					`**Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
+					`**Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
 					`\u200b`
 				])
 				.addField('Permission', [
-					`**❯ Admin:** ${isAdmin}`, `\u200b`,
-					`**❯ Muted:** ${isMuted}`, `\u200b`,
-					`**❯ Elevated Permissions:**`, `${memberelavatedperms.join(', ')}`, `\u200b`,
-					`**❯ Text Permissions:**`, `${membertextpermissions.join(', ')}`, `\u200b`,
-					`**❯ Voice Permissions:**`, `${membervoicepermissions.join(', ')}`, `\u200b`,
-					`**❯ Member Permissions Integer:**`, `\`${member.permissions.bitfield}\``
+					`**Admin:** ${isAdmin}`, `\u200b`,
+					`**Muted:** ${isMuted}`, `\u200b`,
+					`**Elevated Permissions:**`, `${memberelavatedperms.join(', ')}`, `\u200b`,
+					`**Text Permissions:**`, `${membertextpermissions.join(', ')}`, `\u200b`,
+					`**Voice Permissions:**`, `${membervoicepermissions.join(', ')}`, `\u200b`,
+					`**Member Permissions Integer:**`, `\`${member.permissions.bitfield}\``
 				])
 				.setTimestamp()
 				.setFooter(`${bot.user.username} by FleeffyPawsYT`);
@@ -134,29 +134,29 @@ module.exports.run = async (bot, message, args) => {
 				}))
 				.setColor(`#32cd32`)
 				.addField('User', [
-					`**❯ Username:** ${member.user.username}`,
-					`**❯ Discriminator:** ${member.user.discriminator}`,
-					`**❯ ID:** ${member.id}`,
-					`**❯ Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
-					`**❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
-					`**❯ Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
-					`**❯ Game:** ${member.user.presence.game || 'Not playing a game.'}`,
+					`**Username:** ${member.user.username}`,
+					`**Discriminator:** ${member.user.discriminator}`,
+					`**ID:** ${member.id}`,
+					`**Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
+					`**Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
+					`**Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
+					`**Game:** ${member.user.presence.game || 'Not playing a game.'}`,
 					`\u200b`
 				])
 				.addField('Member', [
-					`**❯ Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
-					`**❯ Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
-					`**❯ Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
-					`**❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
+					`**Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
+					`**Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
+					`**Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
+					`**Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
 					`\u200b`
 				])
 				.addField('Permission', [
-					`**❯ Admin:** ${isAdmin}`, `\u200b`,
-					`**❯ Muted:** ${isMuted}`, `\u200b`,
-					`**❯ Elevated Permissions:**`, `${memberelavatedperms.join(', ')}`, `\u200b`,
-					`**❯ Text Permissions:**`, `${membertextpermissions.join(', ')}`, `\u200b`,
-					`**❯ Voice Permissions:**`, `${membervoicepermissions.join(', ')}`, `\u200b`,
-					`**❯ Member Permissions Integer:**`, `\`${member.permissions.bitfield}\``
+					`**Admin:** ${isAdmin}`, `\u200b`,
+					`**Muted:** ${isMuted}`, `\u200b`,
+					`**Elevated Permissions:**`, `${memberelavatedperms.join(', ')}`, `\u200b`,
+					`**Text Permissions:**`, `${membertextpermissions.join(', ')}`, `\u200b`,
+					`**Voice Permissions:**`, `${membervoicepermissions.join(', ')}`, `\u200b`,
+					`**Member Permissions Integer:**`, `\`${member.permissions.bitfield}\``
 				])
 				.setTimestamp()
 				.setFooter(`${bot.user.username} by FleeffyPawsYT`);
@@ -173,30 +173,30 @@ module.exports.run = async (bot, message, args) => {
 				}))
 				.setColor(`#32cd32`)
 				.addField('User', [
-					`**❯ Username:** ${member.user.username}`,
-					`**❯ Discriminator:** ${member.user.discriminator}`,
-					`**❯ ID:** ${member.id}`,
-					`**❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
-					`**❯ Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
-					`**❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
-					`**❯ Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
-					`**❯ Game:** ${member.user.presence.game || 'Not playing a game.'}`,
+					`**Username:** ${member.user.username}`,
+					`**Discriminator:** ${member.user.discriminator}`,
+					`**ID:** ${member.id}`,
+					`**Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
+					`**Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
+					`**Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
+					`**Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
+					`**Game:** ${member.user.presence.game || 'Not playing a game.'}`,
 					`\u200b`
 				])
 				.addField('Member', [
-					`**❯ Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
-					`**❯ Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
-					`**❯ Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
-					`**❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
+					`**Highest Role:** ${member.roles.highest.id === message.guild.id ? 'None' : member.roles.highest.name}`,
+					`**Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
+					`**Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
+					`**Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
 					`\u200b`
 				])
 				.addField('Permission', [
-					`**❯ Admin:** ${isAdmin}`, `\u200b`,
-					`**❯ Muted:** ${isMuted}`, `\u200b`,
-					`**❯ Elevated Permissions:**`, `${memberelavatedperms.join(', ')}`, `\u200b`,
-					`**❯ Text Permissions:**`, `${membertextpermissions.join(', ')}`, `\u200b`,
-					`**❯ Voice Permissions:**`, `${membervoicepermissions.join(', ')}`, `\u200b`,
-					`**❯ Member Permissions Integer:**`, `\`${member.permissions.bitfield}\``
+					`**Admin:** ${isAdmin}`, `\u200b`,
+					`**Muted:** ${isMuted}`, `\u200b`,
+					`**Elevated Permissions:**`, `${memberelavatedperms.join(', ')}`, `\u200b`,
+					`**Text Permissions:**`, `${membertextpermissions.join(', ')}`, `\u200b`,
+					`**Voice Permissions:**`, `${membervoicepermissions.join(', ')}`, `\u200b`,
+					`**Member Permissions Integer:**`, `\`${member.permissions.bitfield}\``
 				])
 				.setTimestamp()
 				.setFooter(`${bot.user.username} by FleeffyPawsYT`);

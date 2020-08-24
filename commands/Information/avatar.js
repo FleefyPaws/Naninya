@@ -6,17 +6,14 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
-		const member = message.mentions.members.last() || message.guild.members.cache.get(args[0]) || message.member;
+		const member = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]) ? message.guild.members.cache.get(args[0]) : message.member;
 		const avatar = member.user.displayAvatarURL({
 			format: 'png',
 			dynamic: true,
 			size: 2048
 		});
 		const embed = new MessageEmbed()
-			.setColor(0xFFFF00)
+			.setColor('#32cd32')
 			.setTitle(`Avatar for ${member.user.username}:`)
 			.setImage(`${avatar}`)
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);

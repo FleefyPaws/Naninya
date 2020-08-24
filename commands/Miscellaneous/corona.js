@@ -15,9 +15,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		const countries = args[0];
 		const invalidcontry = new MessageEmbed()
 			.setTitle('❌ Country Not Found. Please try again.')
@@ -27,9 +24,12 @@ module.exports.run = async (bot, message, args) => {
 			.then(async (data) => {
 				if (!data.country) {
 					message.delete();
-					return message.channel.send(invalidcontry).then(msg => msg.delete({
-						timeout: 5000
-					}));
+					return message.channel.send(invalidcontry).then(msg => {
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+						else msg.delete({
+							timeout: 5000
+						})
+					});
 				}
 				const country = data.country.toLocaleString();
 				const {

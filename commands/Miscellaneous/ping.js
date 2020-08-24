@@ -6,9 +6,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		const pingingEmbed = new MessageEmbed()
 			.setColor(`#32cd32`)
 			.setTitle('Pinging...');
@@ -16,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
 		const msg = await message.channel.send(pingingEmbed);
 
 		const latency = msg.createdTimestamp - message.createdTimestamp;
-		msg.delete();
+		msg.edit('');
 		let color;
 		if (latency && Math.round(bot.ws.ping) >= 200) {
 			color = '#FF0000';
@@ -27,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
 		}
 		const pingdeEmbed = new MessageEmbed()
 			.setTitle('Pong!')
-			.addField('Latencies', [`**❯ Bot Latency: \`${latency}ms\`**`, `**❯ API Latency: \`${Math.round(bot.ws.ping)}ms\`**`])
+			.addField('Latencies', [`**Bot Latency: \`${latency}ms\`**`, `**API Latency: \`${Math.round(bot.ws.ping)}ms\`**`])
 			.setColor(color)
 			.setTimestamp()
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);

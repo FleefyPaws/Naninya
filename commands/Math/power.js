@@ -10,36 +10,48 @@ module.exports.run = async (bot, message, args) => {
 			const err1 = new MessageEmbed()
 				.setTitle('❌ Please provide the first number')
 				.setColor('#FF0000');
-			return message.channel.send(err1).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err1).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (!power) {
 			message.delete();
 			const err2 = new MessageEmbed()
 				.setTitle('❌ Please provide the first number')
 				.setColor('#FF0000');
-			return message.channel.send(err2).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err2).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (isNaN(math)) {
 			message.delete();
 			const err1 = new MessageEmbed()
 				.setTitle('❌ The first number should be a number')
 				.setColor('#FF0000');
-			return message.channel.send(err1).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err1).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		if (isNaN(power)) {
 			message.delete();
 			const err1 = new MessageEmbed()
 				.setTitle('❌ The second number should be a number')
 				.setColor('#FF0000');
-			return message.channel.send(err1).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(err1).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+				else msg.delete({
+					timeout: 5000
+				})
+			});
 		}
 		const embed = new MessageEmbed()
 			.setColor('#32cd32')

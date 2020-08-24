@@ -10,9 +10,6 @@ module.exports.run = async (bot, message) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
-		}
 		if (!message.member.hasPermission('ADMINISTRATOR')) {
 			message.delete();
 			return message.channel.send(nopermembed).then(msg => msg.delete({
@@ -20,17 +17,20 @@ module.exports.run = async (bot, message) => {
 			}));
 		}
 		Mute.findOne({
-			GuildID: message.guild.id
-		},
+				GuildID: message.guild.id
+			},
 			async (err, data) => {
 				if (err) console.log(err);
 				if (!data) {
 					const nope1rmembed = new MessageEmbed()
 						.setTitle(`❌ The mute role has not been set for this server.\nSet it up by using this command \`${bot.prefix}setmuterole <ROLE>\`!`)
 						.setColor('#FF0000');
-					return message.channel.send(nope1rmembed).then(msg => msg.delete({
-						timeout: 5000
-					}));
+					return message.channel.send(nope1rmembed).then(msg => {
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
+						else msg.delete({
+							timeout: 5000
+						})
+					});
 				} else {
 					const role = message.guild.roles.cache.get(data.RoleID);
 					const nope1r3membed = new MessageEmbed()
