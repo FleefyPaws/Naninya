@@ -11,7 +11,6 @@ let Timeout = new Collection()
  * @param {Client} bot 
  * @param {Message} message
  */
-const mongoCurrency = require('discord-mongo-currency');
 module.exports = async (bot, message) => {
 	if (!message.guild || message.author.bot) return;
 	const mentionRegex = RegExp(`^<@!${bot.user.id}>$`);
