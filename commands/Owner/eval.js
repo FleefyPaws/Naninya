@@ -4,7 +4,7 @@ const Discord = require("discord.js"),
     } = require("node-superfetch");
 
 module.exports.run = async (bot, message, args) => {
-    if (!message.author.id === '443278070825091072') return;
+    if (message.author.id !== '443278070825091072') return;
 
     const embed = new Discord.MessageEmbed()
         .addField("Input", "```js\n" + args.join(" ") + "```");
