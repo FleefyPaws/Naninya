@@ -1,6 +1,7 @@
 const {
 	MessageEmbed
 } = require('discord.js');
+const ms = require('ms')
 const fs = require('fs');
 module.exports.run = async (bot, message, args) => {
 	try {
