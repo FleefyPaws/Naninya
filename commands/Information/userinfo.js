@@ -205,7 +205,7 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('An error occured')
 			.setColor('#FF0000')
 			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
-		const user = bot.users.cache.find('443278070825091072')
+		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);
 	}

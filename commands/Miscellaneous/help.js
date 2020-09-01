@@ -8,9 +8,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		const embed = new MessageEmbed()
 			.setColor('32CD32')
 			.setAuthor(`${message.guild.me.displayName} Help`, message.guild.iconURL)
@@ -63,7 +60,7 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('An error occured')
 			.setColor('#FF0000')
 			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
-		const user = bot.users.cache.find('443278070825091072')
+		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);
 	}
