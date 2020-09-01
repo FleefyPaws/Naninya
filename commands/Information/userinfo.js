@@ -22,9 +22,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		const member = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]) || message.member;
 		let memberelavatedperms = [];
 		let isMuted;
@@ -203,12 +200,14 @@ module.exports.run = async (bot, message, args) => {
 			return message.channel.send(embed);
 		}
 	} catch (e) {
-		console.log(e);
+		console.log(err);
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
-			.setColor('#FF000')
-			.setDescription(`Error: ${e}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
-		message.channel.send(errembed);
+			.setColor('#FF0000')
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+		const user = bot.guilds.cache.find('443278070825091072')
+		user.send(errembed)
+		return message.channel.send(errembed);
 	}
 };
 

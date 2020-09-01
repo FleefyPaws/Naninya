@@ -1,7 +1,7 @@
 const {
 	MessageEmbed
 } = require('discord.js');
-const Mute = require('../../models/muterole');
+const Mute = require('../../models/Mute');
 module.exports.run = async (bot, message, args) => {
 	try {
 		const nopermembed = new MessageEmbed()
@@ -30,9 +30,9 @@ module.exports.run = async (bot, message, args) => {
 			});
 		}
 		Mute.findOne({
-				RoleID: role.id,
-				GuildID: message.guild.id
-			},
+			RoleID: role.id,
+			GuildID: message.guild.id
+		},
 			async (err, data) => {
 				if (err) console.log(err);
 				if (!data) {
@@ -67,16 +67,17 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('An error occured')
 			.setColor('#FF0000')
 			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+		const user = bot.guilds.cache.find('443278070825091072')
+		user.send(errembed)
 		return message.channel.send(errembed);
 	}
 };
 
 module.exports.config = {
 	name: 'setmuterole',
-	description: 'Sets the muterole for a server',
+	description: 'Sets the muterole of a server',
 	usage: '<ROLE>',
 	category: 'Config',
 	timeout: 5000,
-	timeoutname: '5 seconds',
 	accessableby: 'Admins'
 };

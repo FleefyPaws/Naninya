@@ -1,7 +1,7 @@
 const {
 	MessageEmbed
 } = require('discord.js');
-const Mute = require('../../models/muterole');
+const Mute = require('../../models/Mute');
 module.exports.run = async (bot, message) => {
 	try {
 		const nopermembed = new MessageEmbed()
@@ -11,14 +11,20 @@ module.exports.run = async (bot, message) => {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
 		if (!message.member.hasPermission('ADMINISTRATOR')) {
-			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			if (!message.guild.me.hasPermission('MANAGE_MESSAGES')) {
+				return message.channel.send(nopermembed).then(msg => msg.delete({
+					timeout: 5000
+				}));
+			} else {
+				message.delete();
+				return message.channel.send(nopermembed).then(msg => msg.delete({
+					timeout: 5000
+				}));
+			}
 		}
 		Mute.findOne({
-				GuildID: message.guild.id
-			},
+			GuildID: message.guild.id
+		},
 			async (err, data) => {
 				if (err) console.log(err);
 				if (!data) {
@@ -45,15 +51,16 @@ module.exports.run = async (bot, message) => {
 			.setTitle('An error occured')
 			.setColor('#FF0000')
 			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+		const user = bot.guilds.cache.find('443278070825091072')
+		user.send(errembed)
 		return message.channel.send(errembed);
 	}
 };
 
 module.exports.config = {
 	name: 'muterole',
-	description: 'Views the muterole for a server',
-	category: 'Config',
+	description: 'Views the muterole of a server',
+	category: 'Moderation',
 	timeout: 5000,
-	timeoutname: '5 seconds',
-	accessableby: 'Admins'
+	accessableby: 'Moderator',
 };

@@ -37,9 +37,6 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
 		const members = message.guild.members.cache;
 		const channels = message.guild.channels.cache;
@@ -92,7 +89,9 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('An error occured')
 			.setColor('#FF0000')
 			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
-		message.channel.send(errembed);
+		const user = bot.guilds.cache.find('443278070825091072')
+		user.send(errembed)
+		return message.channel.send(errembed);
 	}
 };
 async function trimArray(arr, maxLen = 10) {

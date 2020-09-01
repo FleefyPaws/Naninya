@@ -1,7 +1,7 @@
 const {
 	MessageEmbed
 } = require('discord.js');
-const Mute = require('../../models/muterole');
+const Mute = require('../../models/Mute');
 const ms = require('ms');
 module.exports.run = async (bot, message, args) => {
 	try {
@@ -71,8 +71,8 @@ module.exports.run = async (bot, message, args) => {
 			.setColor('#FF0000');
 		const modLogChannel = message.guild.channels.cache.find(cha => cha.name === 'mod-logs');
 		Mute.findOne({
-				GuildID: message.guild.id
-			},
+			GuildID: message.guild.id
+		},
 			async (err, data1) => {
 				if (err) console.log(err);
 				if (!data1) {
@@ -186,7 +186,9 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('An error occured')
 			.setColor('#FF0000')
 			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
-		message.channel.send(errembed);
+		const user = bot.guilds.cache.find('443278070825091072')
+		user.send(errembed)
+		return message.channel.send(errembed);
 	}
 };
 

@@ -12,7 +12,7 @@ let Timeout = new Collection()
  * @param {Message} message
  */
 module.exports = async (bot, message) => {
-	if (!message.guild || message.author.bot) return;
+	if (message.author.bot) return;
 	const mentionRegex = RegExp(`^<@!${bot.user.id}>$`);
 
 	const prefixhelp = new MessageEmbed()
@@ -27,6 +27,7 @@ module.exports = async (bot, message) => {
 			message.channel.send(prefixhelp);
 		}
 	}
+	if (!message.guild && message.author.id !== '443278070825091072') return;
 	let args = message.content.slice(bot.prefix.length).trim().split(/ +/g);
 	let cmd = args.shift().toLowerCase();
 	if (!message.content.startsWith(bot.prefix.toLowerCase())) return

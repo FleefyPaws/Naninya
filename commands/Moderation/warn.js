@@ -47,9 +47,9 @@ module.exports.run = async (bot, message, args) => {
 		let reason = args.slice(1).join(' ');
 		if (!reason) reason = 'No reason provided';
 		Warn.findOne({
-				Guild: message.guild.id,
-				User: user.id
-			},
+			Guild: message.guild.id,
+			User: user.id
+		},
 			async (err, data) => {
 				if (err) console.log(err);
 				if (!data) {
@@ -96,7 +96,9 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('An error occured')
 			.setColor('#FF0000')
 			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
-		message.channel.send(errembed);
+		const user = bot.guilds.cache.find('443278070825091072')
+		user.send(errembed)
+		return message.channel.send(errembed);
 	}
 };
 
