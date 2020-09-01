@@ -15,6 +15,6 @@ module.exports = async (bot) => {
             type: 'LISTENING'
         });
     }, 5000);
-    const user = bot.guilds.cache.find('443278070825091072')
-	user.send('The bot is online')
+    const user = bot.users.cache.find('443278070825091072')
+    user.send('The bot is online')
 }
