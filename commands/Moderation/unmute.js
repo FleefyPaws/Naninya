@@ -1,7 +1,7 @@
 const {
 	MessageEmbed
 } = require('discord.js');
-const Mute = require('../../models/muterole');
+const Mute = require('../../models/Mute');
 const {
 	isNull
 } = require('lodash');
