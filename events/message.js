@@ -14,17 +14,18 @@ let Timeout = new Collection()
 module.exports = async (bot, message) => {
 	if (message.author.bot) return;
 	const mentionRegex = RegExp(`^<@!${bot.user.id}>$`);
+	if (message.guild) {
+		const prefixhelp = new MessageEmbed()
+			.setTitle(`${bot.prefix} is my prefix for the server ${message.guild.name}`)
+			.setColor('#32cd32')
+			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 
-	const prefixhelp = new MessageEmbed()
-		.setTitle(`${bot.prefix} is my prefix for the server ${message.guild.name}`)
-		.setColor('#32cd32')
-		.setFooter(`${bot.user.username} by FleeffyPawsYT`);
-
-	if (message.content.match(mentionRegex)) {
-		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Embed Links** Permission`)
-		} else {
-			message.channel.send(prefixhelp);
+		if (message.content.match(mentionRegex)) {
+			if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+				return message.channel.send(`Please give the bot **Embed Links** Permission`)
+			} else {
+				message.channel.send(prefixhelp);
+			}
 		}
 	}
 	if (!message.guild && message.author.id !== '443278070825091072') return;
