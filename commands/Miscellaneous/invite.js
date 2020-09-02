@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
 		}
 		const embed = new MessageEmbed()
 			.setTitle('Invite the bot to your server')
-			.setDescription('[Bot Invite](https://bit.ly/3iVKDX6)')
+			.setDescription('[Bot Invite](https://discord.com/api/oauth2/authorize?client_id=714009112605622332&permissions=1544416374&scope=bot)')
 			.setTimestamp()
 			.setColor('#32CD32')
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
