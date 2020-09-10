@@ -3,13 +3,8 @@ const {
     MessageEmbed,
     GuildMember
 } = require('discord.js');
-/**
- * 
- * @param {Client} bot 
- * @param {GuildMember} member
- */
 module.exports = async (bot, member) => {
-     const statuses = [
+    const statuses = [
         `${bot.guilds.cache.size} servers!`,
         `${bot.users.cache.size} users!`,
         `Now has ${bot.commands.size} Commands`
@@ -21,7 +16,7 @@ module.exports = async (bot, member) => {
             type: 'LISTENING'
         });
     }, 5000);
-    if (member.guild.id !== '743730169075728414') {
+    if (member.guild.id !== '719425057100791841') {
         return;
     } else {
         const embed = new MessageEmbed()
@@ -30,7 +25,7 @@ module.exports = async (bot, member) => {
                 dynamic: true,
                 size: 1024
             }))
-        const channel = member.guild.channels.cache.get('743761572475961346')
+        const channel = member.guild.channels.cache.get('719462083653271583')
         return channel.send(embed)
     }
 }

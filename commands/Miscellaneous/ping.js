@@ -13,7 +13,6 @@ module.exports.run = async (bot, message, args) => {
 		const msg = await message.channel.send(pingingEmbed);
 
 		const latency = msg.createdTimestamp - message.createdTimestamp;
-		msg.edit(' ');
 		let color;
 		if (latency && Math.round(bot.ws.ping) >= 200) {
 			color = '#FF0000';
@@ -29,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
 			.setTimestamp()
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 
-		message.channel.send(pingdeEmbed);
+		msg.edit(pingdeEmbed);
 	} catch (err) {
 		console.log(err);
 		const errembed = new MessageEmbed()

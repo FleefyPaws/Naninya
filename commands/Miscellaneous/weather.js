@@ -12,37 +12,52 @@ module.exports.run = async (bot, message, args) => {
 			degreeType: 'C'
 		}, (error, result) => {
 			if (error) {
-				message.delete();
 				return message.channel.send(error).then(msg => {
-					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-					else msg.delete({
-						timeout: 5000
-					})
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+						msg.delete({
+							timeout: 5000
+						})
+					} else {
+						message.delete()
+						msg.delete({
+							timeout: 5000
+						})
+					}
 				});
 			}
 			if (!args[0]) {
-				message.delete();
 				const errembed = new MessageEmbed()
 					.setTitle('❌ Please provide a location.')
 					.setColor('#FF0000');
 				return message.channel.send(errembed).then(msg => {
-					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-					else msg.delete({
-						timeout: 5000
-					})
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+						msg.delete({
+							timeout: 5000
+						})
+					} else {
+						message.delete()
+						msg.delete({
+							timeout: 5000
+						})
+					}
 				});
 			}
 
 			if (result === undefined || result.length === 0) {
-				message.delete();
 				const errembed = new MessageEmbed()
 					.setTitle('❌ Invalid location.')
 					.setColor('#FF0000');
 				return message.channel.send(errembed).then(msg => {
-					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-					else msg.delete({
-						timeout: 5000
-					})
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+						msg.delete({
+							timeout: 5000
+						})
+					} else {
+						message.delete()
+						msg.delete({
+							timeout: 5000
+						})
+					}
 				});
 			}
 			var {

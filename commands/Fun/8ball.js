@@ -2,21 +2,27 @@ const {
 	MessageEmbed
 } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
+	// Error Embed
+	const questionembed = new MessageEmbed()
+		.setTitle('❌ You did not specify the question')
+		.setColor('#FF0000');
 	try {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
 		const question = args.slice(0).join(' ');
 		if (!question) {
-			message.delete();
-			const nopermembed = new MessageEmbed()
-				.setTitle('❌ You did not specify your question!')
-				.setColor('#FF0000');
-			return message.channel.send(nopermembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+			return message.channel.send(questionembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const responses = [

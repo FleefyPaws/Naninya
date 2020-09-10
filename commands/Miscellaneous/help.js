@@ -38,9 +38,18 @@ module.exports.run = async (bot, message, args) => {
 				.setColor('#FF0000');
 			let command = bot.commands.get(bot.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase());
 			if (!command) {
-				return message.channel.send(err1embed).then(msg => msg.delete({
-					timeout: 5000
-				}));
+				return message.channel.send(err1embed).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+						msg.delete({
+							timeout: 5000
+						})
+					} else {
+						message.delete()
+						msg.delete({
+							timeout: 5000
+						})
+					}
+				});
 			}
 			command = command.config;
 

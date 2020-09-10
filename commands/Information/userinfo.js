@@ -75,7 +75,7 @@ module.exports.run = async (bot, message, args) => {
 
 		function game1() {
 			let game;
-			if (member.user.presence.activities.length >= 1) game = `**${member.user.presence.activities[0].type}** ${member.user.presence.activities[0].name}`;
+			if (member.user.presence.activities.length >= 1) game = `${member.user.presence.activities[0].type} ${member.user.presence.activities[0].name}`;
 			else if (member.user.presence.activities.length < 1) game = 'Not playing a game';
 			return game;
 		}
@@ -137,7 +137,7 @@ module.exports.run = async (bot, message, args) => {
 					`**Avatar:** [Avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
 					`**Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
 					`**Status:** ${member.user.presence.status.slice(0, 1).toUpperCase() + member.user.presence.status.slice(1)}`,
-					`**Game:** ${member.user.presence.game || 'Not playing a game.'}`,
+					`**Game:** ${game1()}`,
 					`\u200b`
 				])
 				.addField('Member', [

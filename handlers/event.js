@@ -11,4 +11,10 @@ module.exports = async (bot) => {
     bot.on('message', async (message) => {
         require('../events/message')(bot, message)
     })
+    bot.on('channelDelete', async (bot, channel) => {
+        require('../events/channelDelete')
+    })
+    bot.on('channelCreate', async (bot, channel) => {
+        require('../events/channelCreate')
+    })
 }

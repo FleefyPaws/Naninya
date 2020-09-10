@@ -14,7 +14,10 @@ module.exports.run = async (bot, message, args) => {
 		else if (user.presence.activities.length > 1) status = user.presence.activities[1];
 
 		if (user.presence.activities.length === 0 || status.name !== 'Spotify' && status.type !== 'LISTENING') {
-			return message.channel.send("This user isn't listening to Spotify.");
+			const embed1 = new MessageEmbed()
+				.setTitle('❌ That user isnt listening to spotify!')
+				.setColor('#FF0000');
+			return message.channel.send(embed1);
 		}
 
 		if (status !== null && status.type === 'LISTENING' && status.name === 'Spotify' && status.assets !== null) {

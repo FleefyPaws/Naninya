@@ -2,6 +2,13 @@ const {
 	MessageEmbed
 } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
+	// Error Embeds
+	const firstchoise = new MessageEmbed()
+		.setTitle('❌ You did not specify the first choise!')
+		.setColor('#FF0000');
+	const secondchoise = new MessageEmbed()
+		.setTitle('❌ You did not specify the first choise!')
+		.setColor('#FF0000');
 	try {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
@@ -10,31 +17,32 @@ module.exports.run = async (bot, message, args) => {
 			`${args[0]}`,
 			`${args[1]}`
 		];
-		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Embed Links** Permission`);
-		}
 		if (!args[0]) {
-			message.delete();
-			const nopermembed = new MessageEmbed()
-				.setTitle('❌ Please provide the first choise')
-				.setColor('#FF0000');
-			return message.channel.send(nopermembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+			return message.channel.send(firstchoise).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		if (!args[0]) {
-			message.delete();
-			const nopermembed = new MessageEmbed()
-				.setTitle('❌ Please provide the second choise')
-				.setColor('#FF0000');
-			return message.channel.send(nopermembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+			return message.channel.send(secondchoise).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const xander = response[Math.floor(Math.random() * response.length)];

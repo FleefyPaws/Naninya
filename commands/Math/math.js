@@ -9,28 +9,38 @@ module.exports.run = async (bot, message, args) => {
 		}
 		const math1 = args.slice(0).join(' ');
 		if (!math1) {
-			message.delete();
 			const err1 = new MessageEmbed()
-				.setTitle('❌ Please provide the question')
+				.setTitle('❌ Please specify the question')
 				.setColor('#FF0000');
 			return message.channel.send(err1).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const resp = calc.evaluate(args.slice(0).join(' '));
 		if (resp === undefined) {
-			message.delete();
 			const err1 = new MessageEmbed()
-				.setTitle('❌ Please provide a valid calculation')
+				.setTitle('❌ Please specify a valid calculation')
 				.setColor('#FF0000');
 			return message.channel.send(err1).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const embed = new MessageEmbed()

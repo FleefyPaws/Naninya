@@ -21,7 +21,7 @@ module.exports = async (bot, member) => {
             type: 'LISTENING'
         });
     }, 5000);
-    if (member.guild.id !== '743730169075728414') {
+    if (member.guild.id !== '719425057100791841') {
         return;
     } else {
         const embed = new MessageEmbed()
@@ -31,7 +31,7 @@ module.exports = async (bot, member) => {
                 dynamic: true,
                 size: 1024
             }))
-        const channel = member.guild.channels.cache.get('743761571498557440')
+        const channel = member.guild.channels.cache.get('719461847983456296')
         return channel.send(embed)
     }
 }

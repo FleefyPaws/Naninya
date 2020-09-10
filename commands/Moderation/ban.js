@@ -13,12 +13,17 @@ module.exports.run = async (bot, message, args) => {
 			return message.channel.send(`Please Give The Bot **Ban Members** Permission`);
 		}
 		if (!message.member.hasPermission('BAN_MEMBERS')) {
-			message.delete();
 			return message.channel.send(nopermembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const higherroleembed = new MessageEmbed()
@@ -35,25 +40,34 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('❌ Please Give The ID Or Mention A Valid Member')
 			.setColor('#FF0000');
 		if (!user) {
-			message.delete();
 			return message.reply(nulluserembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		if (!user.kickable) {
-			message.delete();
 			return message.channel.send(higherroleembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		if (user.id === message.member.id) {
-			message.delete();
 			return message.channel.send(dumb).then(msg => {
 				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
 				else msg.delete({

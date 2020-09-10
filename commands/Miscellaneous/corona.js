@@ -23,12 +23,17 @@ module.exports.run = async (bot, message, args) => {
 			.then(res => res.json())
 			.then(async (data) => {
 				if (!data.country) {
-					message.delete();
 					return message.channel.send(invalidcontry).then(msg => {
-						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-						else msg.delete({
-							timeout: 5000
-						})
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+							msg.delete({
+								timeout: 5000
+							})
+						} else {
+							message.delete()
+							msg.delete({
+								timeout: 5000
+							})
+						}
 					});
 				}
 				const country = data.country.toLocaleString();
