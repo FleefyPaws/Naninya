@@ -9,19 +9,21 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
-		}
 		if (!message.guild.me.hasPermission('KICK_MEMBERS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Kick Members** Permission`);
 		}
 		if (!message.member.hasPermission('KICK_MEMBERS')) {
-			message.delete();
 			return message.channel.send(nopermembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const nulluserembed = new MessageEmbed()
@@ -32,12 +34,17 @@ module.exports.run = async (bot, message, args) => {
 			user = message.guild.members.cache.get(args[0]);
 		}
 		if (!user) {
-			message.delete();
 			return message.channel.send(nulluserembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const higherroleembed = new MessageEmbed()
@@ -47,7 +54,6 @@ module.exports.run = async (bot, message, args) => {
 			.setTitle('❌ You really dumb?')
 			.setColor('#FF0000');
 		if (!user.kickable) {
-			message.delete();
 			return message.channel.send(higherroleembed).then(msg => {
 				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
 				else msg.delete({
@@ -56,12 +62,17 @@ module.exports.run = async (bot, message, args) => {
 			});
 		}
 		if (user.id === message.member.id) {
-			message.delete();
 			return message.channel.send(dumb).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		let reason = args.slice(1).join(' ');
@@ -88,16 +99,22 @@ module.exports.run = async (bot, message, args) => {
 			.setTimestamp()
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 
-		message.delete();
 		await user.send(embed).then(() => {
 			user.kick(reason);
 			const sucessembed = new MessageEmbed()
 				.setTitle(`<:yes:744037966942568539> **${message.author.username}** kicked **${user.user.username}**`)
 				.setColor('#32CD32');
 			message.channel.send(sucessembed).then(msg => {
-				msg.delete({
-					timeout: 5000
-				});
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 			if (!modLogChannel) {
 				if (Math.random() * 100 < 3) {
@@ -114,9 +131,16 @@ module.exports.run = async (bot, message, args) => {
 				.setTitle(`<:yes:744037966942568539> **${message.author.username}** kicked **${user.user.username}**`)
 				.setColor('#32CD32');
 			message.channel.send(sucessembed).then(msg => {
-				msg.delete({
-					timeout: 5000
-				});
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 			if (!modLogChannel) {
 				if (Math.random() * 100 < 3) {
@@ -133,7 +157,7 @@ module.exports.run = async (bot, message, args) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
 		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);

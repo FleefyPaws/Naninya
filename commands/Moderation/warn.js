@@ -10,38 +10,53 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please give the bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Manage Messages** Permission`);
-		}
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-			message.delete();
-			return message.channel.send(nopermembed).then(msg => msg.delete({
-				timeout: 5000
-			}));
+			return message.channel.send(nopermembed).then(msg => {
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
+			});
 		}
 		const user = message.mentions.members.first() ? message.mentions.members.first() : message.guild.members.cache.get(args[0]);
 		const nulluserembed = new MessageEmbed()
 			.setTitle('❌ Please give the ID or mention a valid member')
 			.setColor('#FF0000');
 		if (!user) {
-			message.delete();
 			return message.channel.send(nulluserembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const dumb = new MessageEmbed()
 			.setTitle('❌ You really dumb?')
 			.setColor('#FF0000');
 		if (user.id === message.member.id) {
-			message.delete();
 			return message.channel.send(dumb).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		let reason = args.slice(1).join(' ');
@@ -67,10 +82,16 @@ module.exports.run = async (bot, message, args) => {
 						.setDescription(`Reason: **${reason}** \nWarns: **1**`)
 						.setColor('#32cd32');
 					message.channel.send(successembed).then(msg => {
-						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-						else msg.delete({
-							timeout: 5000
-						})
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+							msg.delete({
+								timeout: 5000
+							})
+						} else {
+							message.delete()
+							msg.delete({
+								timeout: 5000
+							})
+						}
 					});
 				} else {
 					data.Warns.unshift({
@@ -83,10 +104,16 @@ module.exports.run = async (bot, message, args) => {
 						.setDescription(`Reason: **${reason}** \nWarns: **${data.Warns.length}**`)
 						.setColor('#32CD32');
 					message.channel.send(successembed).then(msg => {
-						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-						else msg.delete({
-							timeout: 5000
-						})
+						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+							msg.delete({
+								timeout: 5000
+							})
+						} else {
+							message.delete()
+							msg.delete({
+								timeout: 5000
+							})
+						}
 					});
 				}
 			});
@@ -95,7 +122,7 @@ module.exports.run = async (bot, message, args) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
 		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);

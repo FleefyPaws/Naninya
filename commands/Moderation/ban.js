@@ -53,7 +53,7 @@ module.exports.run = async (bot, message, args) => {
 				}
 			});
 		}
-		if (!user.kickable) {
+		if (!user.bannable) {
 			return message.channel.send(higherroleembed).then(msg => {
 				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 					msg.delete({
@@ -69,10 +69,16 @@ module.exports.run = async (bot, message, args) => {
 		}
 		if (user.id === message.member.id) {
 			return message.channel.send(dumb).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		let reason = args.slice(1).join(' ');
@@ -98,18 +104,22 @@ module.exports.run = async (bot, message, args) => {
 			.setTimestamp()
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 
-		message.delete();
-
 		const sucessembed = new MessageEmbed()
 			.setTitle(`<:yes:744037966942568539> \`${message.member.user.username}\` Banned \`${user.user.username}\` 🔨`)
 			.setColor('#32CD32');
 		await user.send(sucessembed).then(() => {
 			user.ban(reason);
 			message.channel.send(sucessembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 			if (!modLogChannel) {
 				if (Math.random() * 100 < 3) {
@@ -121,14 +131,21 @@ module.exports.run = async (bot, message, args) => {
 				return modLogChannel.send(modLogEmbed);
 			}
 		}).catch(() => {
-			user.kick(reason);
+			user.ban(reason);
 			const sucesse3mbed = new MessageEmbed()
-				.setTitle(`<:yes:744037966942568539> **${message.author.username}** kicked **${user.user.username}**`)
+				.setTitle(`<:yes:744037966942568539> **${message.author.username}** banned **${user.user.username}**`)
 				.setColor('#32CD32');
 			message.channel.send(sucesse3mbed).then(msg => {
-				msg.delete({
-					timeout: 5000
-				});
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 			if (!modLogChannel) {
 				if (Math.random() * 100 < 3) {
@@ -145,7 +162,7 @@ module.exports.run = async (bot, message, args) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
 		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);

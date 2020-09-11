@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
 		}
 		const embed = new MessageEmbed()
 			.setTitle('Invite the bot to your server')
-			.setDescription('[Server](https://discord.gg/CnHEb3h)')
+			.setDescription('[Server](https://discord.gg/QTdEFhk)')
 			.setTimestamp()
 			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 		message.channel.send(embed);
@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
 		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);

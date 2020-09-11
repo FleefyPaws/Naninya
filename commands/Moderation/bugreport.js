@@ -3,13 +3,7 @@ const {
 	Client,
 	Message
 } = require('discord.js');
-const Bug = require('../../models/bugreport');
-/**
- * 
- * @param {Client} bot 
- * @param {Message} message 
- * @param {String[]} args 
- */
+const Bug = require('../../models/Bug');
 module.exports.run = async (bot, message, args) => {
 	try {
 		const nopermembed = new MessageEmbed()
@@ -18,16 +12,18 @@ module.exports.run = async (bot, message, args) => {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
-		if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Manage Messages** Permission`);
-		}
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-			message.delete();
 			return message.channel.send(nopermembed).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		const asd = new MessageEmbed()
@@ -36,10 +32,16 @@ module.exports.run = async (bot, message, args) => {
 		const bugstring = args.slice(0).join(' ');
 		if (!bugstring) {
 			return message.channel.send(asd).then(msg => {
-				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-				else msg.delete({
-					timeout: 5000
-				})
+				if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+					msg.delete({
+						timeout: 5000
+					})
+				} else {
+					message.delete()
+					msg.delete({
+						timeout: 5000
+					})
+				}
 			});
 		}
 		Bug.findOne({
@@ -57,10 +59,16 @@ module.exports.run = async (bot, message, args) => {
 					.setColor('#32cd32');
 				newData.save();
 				return message.channel.send(asd1).then(msg => {
-					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-					else msg.delete({
-						timeout: 5000
-					})
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+						msg.delete({
+							timeout: 5000
+						})
+					} else {
+						message.delete()
+						msg.delete({
+							timeout: 5000
+						})
+					}
 				});
 			} else {
 				const newData = new Bug({
@@ -79,11 +87,17 @@ module.exports.run = async (bot, message, args) => {
 					.setDescription(`<@443278070825091072> New Report\nBug: ${bugstring}\nMember: ${message.author.username}(${message.author.id})\nGuild: ${message.guild.name}(${message.guild.id})`)
 				channel.send(reportedchannelembed)
 				return message.channel.send(asd1).then(msg => {
-					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) return;
-					else msg.delete({
-						timeout: 5000
-					})
-				});;
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+						msg.delete({
+							timeout: 5000
+						})
+					} else {
+						message.delete()
+						msg.delete({
+							timeout: 5000
+						})
+					}
+				});
 			}
 		});
 	} catch (err) {
@@ -91,7 +105,7 @@ module.exports.run = async (bot, message, args) => {
 		const errembed = new MessageEmbed()
 			.setTitle('An error occured')
 			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/CnHEb3h)**`);
+			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
 		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);

@@ -36,8 +36,9 @@ module.exports = async (bot, message) => {
 	// Command timeout
 	if (command.config.timeout) {
 		if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: true })}`)
+		// Run command first
 		command.run(bot, message, args)
-		// Set the timeout
+		// Then Set the timeout
 		Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
 		// Set a timeout to delete the Cooldown timeout
 		setTimeout(() => {
