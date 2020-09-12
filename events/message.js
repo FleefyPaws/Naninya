@@ -42,7 +42,7 @@ module.exports = async (bot, message) => {
 			return;
 		}
 		
-		if (!message.guild.me.hasPermission('READ_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+		if (!message.guild.me.hasPermission('VIEW_CHANNEL') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			console.log(`${message.guild.name} Does not allow me to send messages`)
 			return;
 		}
@@ -59,7 +59,7 @@ module.exports = async (bot, message) => {
 			console.log(`${message.guild.name} Does not allow me to send messages`)
 			return;
 		}
-		if (!message.guild.me.hasPermission('READ_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+		if (!message.guild.me.hasPermission('VIEW_CHANNEL') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			console.log(`${message.guild.name} Does not allow me to send messages`)
 			return;
 		}
