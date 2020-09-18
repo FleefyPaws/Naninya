@@ -93,15 +93,15 @@ module.exports.run = async (bot, message, args) => {
 		user.send(errembed)
 		return message.channel.send(errembed);
 	}
-};
-async function trimArray(arr, maxLen = 10) {
-	if (arr.length > maxLen) {
-		const len = arr.length - maxLen;
-		arr = arr.slice(0, maxLen);
-		arr.push(`${len} more...`);
+	async function trimArray(arr, maxLen = 10) {
+		if (arr.length > maxLen) {
+			const len = arr.length - maxLen;
+			arr = arr.slice(0, maxLen);
+			arr.push(`${len} more...`);
+		}
+		return arr;
 	}
-	return arr;
-}
+};
 
 module.exports.config = {
 	name: 'serverinfo',

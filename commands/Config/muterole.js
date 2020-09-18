@@ -105,7 +105,7 @@ module.exports.run = async (bot, message) => {
 module.exports.config = {
     name: 'muterole',
     description: 'Views the muterole of a server',
-    category: 'Moderation',
+    category: 'Config',
     timeout: 5000,
     accessableby: 'Moderator',
 };
