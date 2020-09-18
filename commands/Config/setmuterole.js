@@ -103,7 +103,7 @@ module.exports.run = async (bot, message) => {
 };
 
 module.exports.config = {
-    name: 'muterole',
+    name: 'setmuterole',
     description: 'Views the muterole of a server',
     category: 'Moderation',
     timeout: 5000,
