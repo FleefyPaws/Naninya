@@ -1,6 +1,8 @@
 const {
 	MessageEmbed
 } = require('discord.js');
+const Data = require('../../models/Data');
+const ModLogs = require('../../models/ModLogs');
 module.exports.run = async (bot, message, args) => {
 	try {
 		const nopermembed = new MessageEmbed()
@@ -121,15 +123,7 @@ module.exports.run = async (bot, message, args) => {
 					})
 				}
 			});
-			if (!modLogChannel) {
-				if (Math.random() * 100 < 3) {
-					return message.channel.send('You can receive mod-logs in a channel by creating a channel called `mod-logs`');
-				} else {
-					return;
-				}
-			} else {
-				return modLogChannel.send(modLogEmbed);
-			}
+
 		}).catch(() => {
 			user.ban(reason);
 			const sucesse3mbed = new MessageEmbed()

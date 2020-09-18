@@ -4,12 +4,6 @@ const {
 	Message,
 	Client
 } = require('discord.js');
-/**
- *
- * @param {Client} bot
- * @param {Message} message
- * @param {string[]} args
- */
 module.exports.run = async (bot, message, args) => {
 	try {
 		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
@@ -63,7 +57,6 @@ module.exports.run = async (bot, message, args) => {
 						`Critical: **${critical}**`,
 						`Active: **${active}**`
 					])
-					.setTimestamp()
 					.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 				return message.channel.send(embed);
 			});

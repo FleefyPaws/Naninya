@@ -3,4 +3,4 @@ let Schema = new mongoose.Schema({
   RoleID: String,
   GuildID: String
 });
-module.exports = mongoose.model("muterole", Schema);
+module.exports = mongoose.model("MuteRole", Schema);

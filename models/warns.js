@@ -4,4 +4,4 @@ let Schema = new mongoose.Schema({
   User: String,
   Guild: String,
 });
-module.exports = mongoose.model("warns", Schema);
+module.exports = mongoose.model("Warns", Schema);

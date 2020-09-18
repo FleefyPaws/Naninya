@@ -1,6 +1,7 @@
 const {
 	MessageEmbed
 } = require('discord.js');
+const Data = require('../../models/Data');
 const Mute = require('../../models/Mute');
 module.exports.run = async (bot, message, args) => {
 	try {
@@ -43,9 +44,9 @@ module.exports.run = async (bot, message, args) => {
 			});
 		}
 		Mute.findOne({
-				RoleID: role.id,
-				GuildID: message.guild.id
-			},
+			RoleID: role.id,
+			GuildID: message.guild.id
+		},
 			async (err, data) => {
 				if (err) console.log(err);
 				if (!data) {

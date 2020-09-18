@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 let Schema = new mongoose.Schema({
-  UserID: String,
   GuildID: String,
-  Bug: String
+  ChannelID: String
 });
-module.exports = mongoose.model("Bugs", Schema);
+module.exports = mongoose.model("ModLogs", Schema);
