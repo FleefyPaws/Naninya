@@ -5,6 +5,7 @@ const Data = require('../../models/Data');
 const Mute = require('../../models/Mute');
 module.exports.run = async (bot, message) => {
     try {
+        return message.channel.send('My Owner is currently working on that')
         const nopermembed = new MessageEmbed()
             .setTitle('❌ You do not have the permission to use this command')
             .setColor('#FF0000');
