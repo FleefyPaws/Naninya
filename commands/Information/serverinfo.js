@@ -73,13 +73,13 @@ module.exports.run = async (bot, message, args) => {
 				'\u200b'
 			])
 			.addField('Presence', [
-				`**❯ Online:** ${members.filter(member => member.presence.status === 'online').size}`,
-				`**❯ Idle:** ${members.filter(member => member.presence.status === 'idle').size}`,
-				`**❯ Do Not Disturb:** ${members.filter(member => member.presence.status === 'dnd').size}`,
-				`**❯ Offline:** ${members.filter(member => member.presence.status === 'offline').size}`,
+				`<:online:731504589400178802>: ${members.filter(member => member.presence.status === 'online').size}`,
+				`<:idle:731504868786700348>: ${members.filter(member => member.presence.status === 'idle').size}`,
+				`<:dnd:731504589769277500>: ${members.filter(member => member.presence.status === 'dnd').size}`,
+				`<:offline:731504590255685683>: ${members.filter(member => member.presence.status === 'offline').size}`,
 				'\u200b'
 			])
-			.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None')
+			.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles) : 'None')
 			.setTimestamp();
 		message.channel.send(embed);
 	} catch (err) {
