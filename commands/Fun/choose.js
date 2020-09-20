@@ -3,6 +3,7 @@ const {
 } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
 	// Error Embeds
+	return message.channel.send("**Will Fix Soon**")
 	const firstchoise = new MessageEmbed()
 		.setTitle('❌ You did not specify the first choise!')
 		.setColor('#FF0000');
