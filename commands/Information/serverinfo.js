@@ -79,7 +79,7 @@ module.exports.run = async (bot, message, args) => {
 				`<:offline:731504590255685683>: ${members.filter(member => member.presence.status === 'offline').size}`,
 				'\u200b'
 			])
-			.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? async trimArray(roles) : 'None')
+			.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles) : 'None')
 			.setTimestamp();
 		message.channel.send(embed);
 	} catch (err) {
