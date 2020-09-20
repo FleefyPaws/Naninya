@@ -11,7 +11,7 @@ module.exports = async (bot, message) => {
 	if (message.author.bot) return;
 	if (message.author.id === '443278070825091072' && message.channel.type === 'dm') {
 		if (message.content.toLowerCase() === 'infos') {
-			const arr = [`**Servers:** ${bot.guilds.cache.size.toLocaleString()}`, `**Users:** ${bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`, `**Channels:** ${bot.channels.cache.size.toLocaleString()}`, `**Bot Uptime:** ${ms(bot.uptime, { long: false })}`, `Total: ${formatBytes(process.memoryUsage().heapTotal)}`, `Used: ${formatBytes(process.memoryUsage().heapUsed)}`]
+			const arr = [`**__Infos__**`, `**Servers:** ${bot.guilds.cache.size.toLocaleString()}`, `**Users:** ${bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`, `**Channels:** ${bot.channels.cache.size.toLocaleString()}`, `**Bot Uptime:** ${ms(bot.uptime, { long: false })}`, `**__Memory__**`, `**Total**: ${formatBytes(process.memoryUsage().heapTotal)}`, `**Used**: ${formatBytes(process.memoryUsage().heapUsed)}`]
 			arr.forEach(each => message.channel.send(each));
 			const botinvite = 'https://discord.com/api/oauth2/authorize?client_id=714009112605622332&permissions=1544416374&scope=bot',
 				serverinvite = 'https://discord.gg/QTdEFhk';
