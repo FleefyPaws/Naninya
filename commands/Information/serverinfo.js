@@ -79,7 +79,7 @@ module.exports.run = async (bot, message, args) => {
 				`<:offline:731504590255685683>: ${members.filter(member => member.presence.status === 'offline').size}`,
 				'\u200b'
 			])
-		embed.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None')
+		embed.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? trimArray(roles) : 'None')
 		embed.setTimestamp()
 		embed.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 		message.channel.send(embed);
