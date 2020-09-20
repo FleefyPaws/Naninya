@@ -8,7 +8,20 @@ module.exports.run = async (bot, message, args) => {
 			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 		}
 		const user = message.mentions.members.first() ? message.mentions.members.first() : message.guild.cache.get(args[0]) || message.author;
-
+		const embed133 = new MessageEmbed()
+			.setTitle('❌ That user isnt listening to spotify!')
+			.setColor('#FF0000');{
+		if (!user) {
+			
+		return message.channel.send(embed133).then(msg => {
+			if (!message.channel.me.hasPermission("MANAGE_MESSAGES") && !message.channel.me.hasPermission("ADMINISTRATOR")) {
+				msg.delete({ timeout: 5000 });
+			} else {
+				message.delete();
+				msg.delete({ timeout: 5000 });
+			}
+		});
+		}
 		let status;
 		if (user.presence.activities.length === 1) status = user.presence.activities[0];
 		else if (user.presence.activities.length > 1) status = user.presence.activities[1];
