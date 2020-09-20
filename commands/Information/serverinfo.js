@@ -79,15 +79,7 @@ module.exports.run = async (bot, message, args) => {
 				`<:offline:731504590255685683>: ${members.filter(member => member.presence.status === 'offline').size}`,
 				'\u200b'
 			])
-		async function trimArray(arr, maxLen = 10) {
-			if (arr.length > maxLen) {
-				const len = arr.length - maxLen;
-				arr = arr.slice(0, maxLen);
-				arr.push(`${len} more...`);
-			}
-			return arr;
-		}
-		embed.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join('\n ') : roles.length > 10 ? trimArray(roles) : trimArray(roles))
+		embed.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None')
 		embed.setTimestamp()
 		embed.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 		message.channel.send(embed);
@@ -102,7 +94,14 @@ module.exports.run = async (bot, message, args) => {
 		return message.channel.send(errembed);
 	}
 };
-
+async function trimArray(arr, maxLen = 10) {
+	if (arr.length > maxLen) {
+		const len = arr.length - maxLen;
+		arr = arr.slice(0, maxLen);
+		arr.push(`${len} more...`);
+	}
+	return arr;
+}
 module.exports.config = {
 	name: 'serverinfo',
 	description: 'Server info',
