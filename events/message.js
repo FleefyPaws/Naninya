@@ -8,7 +8,20 @@ const ms = require('ms');
 let Timeout = new Collection();
 module.exports = async (bot, message) => {
 	// Return if no guild or if user is bot
-	if (message.author.bot || !message.guild) return;
+	if (message.author.bot) return;
+	if (message.author.id === '443278070825091072' && message.channel.type === 'dm') {
+		if (message.content.toLowerCase() === 'infos') {
+			const arr = [`**Servers:** ${bot.guilds.cache.size.toLocaleString()}`, `**Users:** ${bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`, `**Channels:** ${bot.channels.cache.size.toLocaleString()}`, `**Bot Uptime:** ${ms(bot.uptime, { long: false })}`, `Total: ${formatBytes(process.memoryUsage().heapTotal)}`, `Used: ${formatBytes(process.memoryUsage().heapUsed)}`]
+			arr.forEach(each => message.channel.send(each));
+			const botinvite = 'https://discord.com/api/oauth2/authorize?client_id=714009112605622332&permissions=1544416374&scope=bot',
+				serverinvite = 'https://discord.gg/QTdEFhk';
+			message.channel.send(botinvite);
+			message.channel.send(serverinvite);
+		} else {
+			return;
+		}
+	}
+	if (!message.guild) return;
 	// Get the prefix mention
 	const mentionRegex = RegExp(`^<@!${bot.user.id}>$`);
 	// Prefix mention embed
@@ -41,7 +54,7 @@ module.exports = async (bot, message) => {
 			console.log(`${message.guild.name} Does not allow me to send messages`)
 			return;
 		}
-		
+
 		if (!message.guild.me.hasPermission('VIEW_CHANNEL') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 			console.log(`${message.guild.name} Does not allow me to send messages`)
 			return;
