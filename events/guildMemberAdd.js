@@ -22,7 +22,7 @@ module.exports = async (bot, member) => {
         return;
     } else {
         const embed = new MessageEmbed()
-            .setTitle(`Welcome ${member.name}. Please Read <#719503578481426472> and have a great time in this server. Meow`)
+            .setTitle(`Welcome ${member.user.username}. Please Read <#719503578481426472> and have a great time in this server. Meow`)
             .setThumbnail(member.user.displayAvatarURL({
                 dynamic: true,
                 size: 1024

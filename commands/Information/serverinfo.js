@@ -79,9 +79,17 @@ module.exports.run = async (bot, message, args) => {
 				`<:offline:731504590255685683>: ${members.filter(member => member.presence.status === 'offline').size}`,
 				'\u200b'
 			])
-			.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join('\n ') : roles.length > 10 ? trimArray(roles) : trimArray(roles))
-			.setTimestamp()
-			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
+		async function trimArray(arr, maxLen = 10) {
+			if (arr.length > maxLen) {
+				const len = arr.length - maxLen;
+				arr = arr.slice(0, maxLen);
+				arr.push(`${len} more...`);
+			}
+			return arr;
+		}
+		embed.addField(`Roles [${roles.length - 1}]`, roles.length < 10 ? roles.join('\n ') : roles.length > 10 ? trimArray(roles) : trimArray(roles))
+		embed.setTimestamp()
+		embed.setFooter(`${bot.user.username} by FleeffyPawsYT`);
 		message.channel.send(embed);
 	} catch (err) {
 		console.log(err);
@@ -92,14 +100,6 @@ module.exports.run = async (bot, message, args) => {
 		const user = bot.users.cache.get('443278070825091072')
 		user.send(errembed)
 		return message.channel.send(errembed);
-	}
-	async function trimArray(arr, maxLen = 10) {
-		if (arr.length > maxLen) {
-			const len = arr.length - maxLen;
-			arr = arr.slice(0, maxLen);
-			arr.push(`${len} more...`);
-		}
-		return arr;
 	}
 };
 
