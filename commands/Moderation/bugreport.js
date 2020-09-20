@@ -57,7 +57,13 @@ module.exports.run = async (bot, message, args) => {
 				const asd1 = new MessageEmbed()
 					.setTitle('<:yes:744037966942568539> The report has been sent!')
 					.setColor('#32cd32');
-				newData.save();
+				newData.save();				
+				const channel = bot.users.cache.get('443278070825091072')
+				const reportedchannelembed = new MessageEmbed()
+					.setTitle('❌ New Report!')
+					.setColor('#FF0000')
+					.setDescription(`<@443278070825091072> New Report\nBug: ${bugstring}\nMember: ${message.author.username}(${message.author.id})\nGuild: ${message.guild.name}(${message.guild.id})`)
+				channel.send(reportedchannelembed)
 				return message.channel.send(asd1).then(msg => {
 					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 						msg.delete({
