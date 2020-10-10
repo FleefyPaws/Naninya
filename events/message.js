@@ -50,10 +50,6 @@ module.exports = async (bot, message) => {
 	if (command.config.timeout) {
 		if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: true })}`)
 		// Run command first
-		if (!message.guild.me.hasPermission('SEND_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			console.log(`${message.guild.name} Does not allow me to send messages`)
-			return;
-		}
 		command.run(bot, message, args)
 		// Then Set the timeout
 		Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
@@ -63,14 +59,6 @@ module.exports = async (bot, message) => {
 		}, command.config.timeout)
 		// Run command
 	} else {
-		if (!message.guild.me.hasPermission('SEND_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			console.log(`${message.guild.name} Does not allow me to send messages`)
-			return;
-		}
-		if (!message.guild.me.hasPermission('VIEW_CHANNEL') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			console.log(`${message.guild.name} Does not allow me to send messages`)
-			return;
-		}
 		return command.run(bot, message, args);
 	}
 }
