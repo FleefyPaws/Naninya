@@ -54,11 +54,6 @@ module.exports = async (bot, message) => {
 			console.log(`${message.guild.name} Does not allow me to send messages`)
 			return;
 		}
-
-		if (!message.guild.me.hasPermission('VIEW_CHANNEL') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			console.log(`${message.guild.name} Does not allow me to send messages`)
-			return;
-		}
 		command.run(bot, message, args)
 		// Then Set the timeout
 		Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
