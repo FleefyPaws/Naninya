@@ -48,9 +48,25 @@ module.exports = async (bot, message) => {
 	if (!command) return;
 	// Command timeout
 	if (command.config.timeout) {
-		if (Timeout.has(`${command.config.name}${message.author.id}`)) return message.channel.send(`Please wait ${ms(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now(), { long: true })}`)
+		if (Timeout.has(`${command.config.name}${message.author.id}`)) {
+			function msToTime(duration) {
+				var milliseconds = parseInt((duration % 1000) / 100),
+					seconds = parseInt((duration / 1000) % 60)
+				return seconds + "." + milliseconds;
+			}
+			return message.channel.send(new MessageEmbed().setTitle('Hold UP!').setDescription(`Please wait \`${msToTime(Timeout.get(`${command.config.name}${message.author.id}`) - Date.now())} Seconds\``).setColor('BLUE'))
+		}
 		// Run command first
-		command.run(bot, message, args)
+		command.run(bot, message, args).catch(err => {
+			console.log(err);
+			const errembed = new MessageEmbed()
+				.setTitle('An error occured')
+				.setColor('#FF0000')
+				.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
+			const user = bot.users.cache.get('443278070825091072')
+			user.send(errembed)
+			return message.channel.send(errembed);
+		});
 		// Then Set the timeout
 		Timeout.set(`${command.config.name}${message.author.id}`, Date.now() + command.config.timeout);
 		// Set a timeout to delete the Cooldown timeout
@@ -59,7 +75,16 @@ module.exports = async (bot, message) => {
 		}, command.config.timeout)
 		// Run command
 	} else {
-		return command.run(bot, message, args);
+		return command.run(bot, message, args).catch(err => {
+			console.log(err);
+			const errembed = new MessageEmbed()
+				.setTitle('An error occured')
+				.setColor('#FF0000')
+				.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
+			const user = bot.users.cache.get('443278070825091072')
+			user.send(errembed)
+			return message.channel.send(errembed);
+		});
 	}
 }
 

@@ -22,10 +22,11 @@ module.exports = async (bot, member) => {
         return;
     } else {
         const embed = new MessageEmbed()
-            .setTitle(`Welcome ${member.user.username}. Please Read <#719503578481426472> and have a great time in this server. Meow`)
+            .setTitle(`Welcome ${member.user.username}.`)
+            .setDescription(`Please Read <#719503578481426472> and have a great time in this server. Meow`)
             .setThumbnail(member.user.displayAvatarURL({
                 dynamic: true,
-                size: 1024
+                size: 2048
             }))
         const channel = member.guild.channels.cache.get('719461847983456296')
         return channel.send(embed)

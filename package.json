@@ -25,5 +25,8 @@
     "request": "^2.88.2",
     "weather-js": "^2.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.5"
+  }
 }

@@ -2,27 +2,17 @@ const {
 	MessageEmbed
 } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
-	try {
-		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
-		}
-		const embed = new MessageEmbed()
-			.setTitle('Invite the bot to your server')
-			.setDescription('[Server](https://discord.gg/QTdEFhk)')
-			.setTimestamp()
-			.setColor("#32CD3")
-			.setFooter(`${bot.user.username} by FleeffyPawsYT`);
-		message.channel.send(embed);
-	} catch (err) {
-		console.log(err);
-		const errembed = new MessageEmbed()
-			.setTitle('An error occured')
-			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
-		const user = bot.users.cache.get('443278070825091072')
-		user.send(errembed)
-		return message.channel.send(errembed);
+	if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+		return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 	}
+	const embed = new MessageEmbed()
+		.setTitle('Invite the bot to your server')
+		.setDescription('[Server](https://discord.gg/QTdEFhk)')
+		.setTimestamp()
+		.setColor("#32CD3")
+		.setFooter(`${bot.user.username} by FleeffyPawsYT`);
+	message.channel.send(embed);
+
 };
 
 module.exports.config = {

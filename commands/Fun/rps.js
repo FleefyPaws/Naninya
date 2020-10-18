@@ -2,43 +2,33 @@ const {
 	MessageEmbed
 } = require('discord.js');
 module.exports.run = async (bot, message) => {
-	try {
-		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Embed Links** Permission`);
-		}
-		if (!message.guild.me.hasPermission('ADD_REACTIONS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please give the bot **Embed Links** Permission`);
-		}
-		const chooseArr = ['🗻', '📰', '✂'];
-		const embed = new MessageEmbed()
-			.setColor('#32cd32')
-			.setFooter(message.guild.me.displayName, bot.user.displayAvatarURL({
-				dynamic: true
-			}))
-			.setDescription('Add a reaction to one of these emojis to play the game!')
-			.setTimestamp();
-
-		const msg = await message.channel.send(embed);
-		const reacted = await promptMessage(msg, message.author, 30, chooseArr);
-
-		const botChoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];
-
-		const result = await getResult(reacted, botChoice);
-		await msg.reactions.removeAll();
-
-		embed.addField(result, `${reacted} vs ${botChoice}`);
-
-		msg.edit(embed);
-	} catch (err) {
-		console.log(err);
-		const errembed = new MessageEmbed()
-			.setTitle('An error occured')
-			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
-		const user = bot.users.cache.get('443278070825091072')
-		user.send(errembed)
-		return message.channel.send(errembed);
+	if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+		return message.channel.send(`Please give the bot **Embed Links** Permission`);
 	}
+	if (!message.guild.me.hasPermission('ADD_REACTIONS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+		return message.channel.send(`Please give the bot **Embed Links** Permission`);
+	}
+	const chooseArr = ['🗻', '📰', '✂'];
+	const embed = new MessageEmbed()
+		.setColor('#32cd32')
+		.setFooter(message.guild.me.displayName, bot.user.displayAvatarURL({
+			dynamic: true
+		}))
+		.setDescription('Add a reaction to one of these emojis to play the game!')
+		.setTimestamp();
+
+	const msg = await message.channel.send(embed);
+	const reacted = await promptMessage(msg, message.author, 30, chooseArr);
+
+	const botChoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];
+
+	const result = await getResult(reacted, botChoice);
+	await msg.reactions.removeAll();
+
+	embed.addField(result, `${reacted} vs ${botChoice}`);
+
+	msg.edit(embed);
+
 	async function getResult(me, clientChosen) {
 		if ((me === '🗻' && clientChosen === '✂') ||
 			(me === '📰' && clientChosen === '🗻') ||

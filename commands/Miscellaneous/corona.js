@@ -5,71 +5,61 @@ const {
 	Client
 } = require('discord.js');
 module.exports.run = async (bot, message, args) => {
-	try {
-		if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-			return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
-		}
-		const countries = args[0];
-		const invalidcontry = new MessageEmbed()
-			.setTitle('❌ Country Not Found. Please try again.')
-			.setColor('#FF0000');
-		fetch(`https://disease.sh/v2/countries/${countries}`)
-			.then(res => res.json())
-			.then(async (data) => {
-				if (!data.country) {
-					return message.channel.send(invalidcontry).then(msg => {
-						if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
-							msg.delete({
-								timeout: 5000
-							})
-						} else {
-							message.delete()
-							msg.delete({
-								timeout: 5000
-							})
-						}
-					});
-				}
-				const country = data.country.toLocaleString();
-				const {
-					flag
-				} = data.countryInfo;
-				const confirmed = data.cases.toLocaleString();
-				const todayconfirmed = data.todayCases.toLocaleString();
-				const deaths = data.deaths.toLocaleString();
-				const todaydeaths = data.todayDeaths.toLocaleString();
-				const todayrecovered = data.todayRecovered.toLocaleString();
-				const recovered = data.recovered.toLocaleString();
-				const critical = data.critical.toLocaleString();
-				const active = data.active.toLocaleString();
-
-				const embed = new MessageEmbed()
-					.setColor('#32cd32')
-					.setTimestamp(new Date())
-					.setAuthor('Coronavirus Statistics', flag)
-					.addField(`Data for: ${country}`, [
-						`Confirmed: **${confirmed}**`,
-						`Confirmed Today: **${todayconfirmed}**`,
-						`Deaths: **${deaths}**`,
-						`Deaths Today: **${todaydeaths}**`,
-						`Recovered: **${recovered}**`,
-						`Recovered Today: **${todayrecovered}**`,
-						`Critical: **${critical}**`,
-						`Active: **${active}**`
-					])
-					.setFooter(`${bot.user.username} by FleeffyPawsYT`);
-				return message.channel.send(embed);
-			});
-	} catch (err) {
-		console.log(err);
-		const errembed = new MessageEmbed()
-			.setTitle('An error occured')
-			.setColor('#FF0000')
-			.setDescription(`Error: ${err}. \nPlease report this error to our support server: **[Link](https://discord.gg/QTdEFhk)**`);
-		const user = bot.users.cache.get('443278070825091072')
-		user.send(errembed)
-		return message.channel.send(errembed);
+	if (!message.guild.me.hasPermission('EMBED_LINKS') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+		return message.channel.send(`Please Give The Bot **Embed Links** Permission`);
 	}
+	const countries = args[0];
+	const invalidcontry = new MessageEmbed()
+		.setTitle('❌ Country Not Found. Please try again.')
+		.setColor('#FF0000');
+	fetch(`https://disease.sh/v2/countries/${countries}`)
+		.then(res => res.json())
+		.then(async (data) => {
+			if (!data.country) {
+				return message.channel.send(invalidcontry).then(msg => {
+					if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
+						msg.delete({
+							timeout: 5000
+						})
+					} else {
+						message.delete()
+						msg.delete({
+							timeout: 5000
+						})
+					}
+				});
+			}
+			const country = data.country.toLocaleString();
+			const {
+				flag
+			} = data.countryInfo;
+			const confirmed = data.cases.toLocaleString();
+			const todayconfirmed = data.todayCases.toLocaleString();
+			const deaths = data.deaths.toLocaleString();
+			const todaydeaths = data.todayDeaths.toLocaleString();
+			const todayrecovered = data.todayRecovered.toLocaleString();
+			const recovered = data.recovered.toLocaleString();
+			const critical = data.critical.toLocaleString();
+			const active = data.active.toLocaleString();
+
+			const embed = new MessageEmbed()
+				.setColor('#32cd32')
+				.setTimestamp(new Date())
+				.setAuthor('Coronavirus Statistics', flag)
+				.addField(`Data for: ${country}`, [
+					`Confirmed: **${confirmed}**`,
+					`Confirmed Today: **${todayconfirmed}**`,
+					`Deaths: **${deaths}**`,
+					`Deaths Today: **${todaydeaths}**`,
+					`Recovered: **${recovered}**`,
+					`Recovered Today: **${todayrecovered}**`,
+					`Critical: **${critical}**`,
+					`Active: **${active}**`
+				])
+				.setFooter(`${bot.user.username} by FleeffyPawsYT`);
+			return message.channel.send(embed);
+		});
+
 };
 
 module.exports.config = {
