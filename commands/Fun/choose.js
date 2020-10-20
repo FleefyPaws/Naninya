@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
 			}
 		});
 	}
-	if (!args[0]) {
+	if (!args[1]) {
 		return message.channel.send(secondchoise).then(msg => {
 			if (!message.guild.me.hasPermission('MANAGE_MESSAGES') && !message.guild.me.hasPermission('ADMINISTRATOR')) {
 				msg.delete({
