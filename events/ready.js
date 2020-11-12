@@ -15,12 +15,6 @@ module.exports = async (bot) => {
     })
     mongoose.connection.on('connected', () => {
         console.log("DataBase connected");
-        const onlineembed = new MessageEmbed()
-            .setTitle('The Bot Is Online!')
-            .setTimestamp()
-            .setColor('#32CD32')
-        const user = bot.users.cache.get('443278070825091072')
-        return user.send(onlineembed)
     });
     const totmem = bot.users.cache.size;
     const botmem = bot.users.cache.filter(x => x.bot).size;
